@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+  boilerplate-react:
+    image: boilerplate-react
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - './:/app'
+    ports:
+      - 3000:5173
