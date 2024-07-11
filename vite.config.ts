@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv, PreviewOptions, ServerOptions, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import pages from 'vite-plugin-pages';
 import fs from 'fs';
 
 // https://vitejs.dev/config/
@@ -25,6 +26,9 @@ export default defineConfig(({ mode = '' }: UserConfig) => {
 	return {
 		plugins: [
 			react(),
+			pages({
+				dirs: 'src/pages'
+			})
 		],
 		server: {
 			port: Number(VITE_PORT),
