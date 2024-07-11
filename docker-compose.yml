@@ -6,8 +6,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    env_file:
-      - .env.development
     volumes:
       - './:/app'
     network_mode: "host"
