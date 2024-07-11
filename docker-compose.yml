@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   boilerplate-react:
-    image: boilerplate-react
+    container_name: boilerplate-react
     build:
       context: .
       dockerfile: ./Dockerfile
