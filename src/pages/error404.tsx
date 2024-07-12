@@ -1,3 +1,3 @@
-const error404 = () => <>not found</>
+const error404 = () => <>not found</>;
 
 export default error404;

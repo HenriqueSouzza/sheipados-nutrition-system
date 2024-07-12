@@ -1,1 +1,1 @@
-declare module '~react-pages'
+declare module '~react-pages';
