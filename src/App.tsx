@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import routes from '~react-pages';
 
-export const App = () => (
+const App = () => (
 	<Suspense fallback={<p>Loading...</p>}>
 		{useRoutes(routes)}
 	</Suspense>

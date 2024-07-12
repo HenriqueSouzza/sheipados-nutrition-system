@@ -1,5 +1,5 @@
-import { FC } from "react"
+import { FC } from 'react';
 
-const Index: FC = () => <>Page default</>
+const Index: FC = () => <>main Page</>
 
 export default Index;

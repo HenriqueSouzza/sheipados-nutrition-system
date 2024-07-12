@@ -27,7 +27,11 @@ export default defineConfig(({ mode = '' }: UserConfig) => {
 		plugins: [
 			react(),
 			pages({
-				dirs: 'src/pages'
+				extendRoute(route) {
+					if (route.path === 'error404') {
+						route.path = '*'
+					}
+				},
 			})
 		],
 		server: {
