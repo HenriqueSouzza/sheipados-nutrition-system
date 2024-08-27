@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  boilerplate-react:
-    container_name: boilerplate-react
+  sheipados-nutrition-react:
+    container_name: sheipados-nutrition-react
     build:
       context: .
       dockerfile: ./Dockerfile
