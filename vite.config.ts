@@ -2,6 +2,7 @@ import { defineConfig, loadEnv, PreviewOptions, ServerOptions, UserConfig } from
 import react from '@vitejs/plugin-react';
 import pages from 'vite-plugin-pages';
 import fs from 'fs';
+import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode = '' }: UserConfig) => {
@@ -35,6 +36,11 @@ export default defineConfig(({ mode = '' }: UserConfig) => {
 				},
 			})
 		],
+		resolve: {
+			alias: {
+				'@': path.resolve(__dirname, './src')
+			},
+		},
 		server: {
 			port: Number(VITE_PORT),
 			host: VITE_HOST,
