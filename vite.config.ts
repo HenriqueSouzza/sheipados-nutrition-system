@@ -12,15 +12,16 @@ export default defineConfig(({ mode = '' }: UserConfig) => {
 	} = loadEnv(mode, process.cwd());
 
 	const server: ServerOptions = {}
-	const preview: PreviewOptions = {
-		https: {
+	const preview: PreviewOptions = {}
+
+	if (VITE_HTTPS === 'true') {
+		const https = {
 			key: fs.readFileSync('.cert/key.pem'),
 			cert: fs.readFileSync('.cert/cert.pem'),
 		}
-	}
 
-	if (VITE_HTTPS === 'true') {
-		server.https = preview.https
+		server.https = https
+		preview.https = https
 	}
 
 	return {
@@ -41,10 +42,7 @@ export default defineConfig(({ mode = '' }: UserConfig) => {
 		},
 		preview: {
 			port: 443,
-			https: {
-				key: fs.readFileSync('.cert/key.pem'),
-				cert: fs.readFileSync('.cert/cert.pem'),
-			},
+			...preview
 		},
 	}
 });
