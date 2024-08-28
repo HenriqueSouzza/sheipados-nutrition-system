@@ -1,6 +1,5 @@
 import { defineConfig, loadEnv, PreviewOptions, ServerOptions, UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import pages from 'vite-plugin-pages';
 import fs from 'fs';
 import path from 'path';
 
@@ -28,13 +27,6 @@ export default defineConfig(({ mode = '' }: UserConfig) => {
 	return {
 		plugins: [
 			react(),
-			pages({
-				extendRoute(route) {
-					if (route.path === 'error404') {
-						route.path = '*'
-					}
-				},
-			})
 		],
 		resolve: {
 			alias: {

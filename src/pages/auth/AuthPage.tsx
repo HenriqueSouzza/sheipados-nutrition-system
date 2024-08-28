@@ -1,8 +1,14 @@
 import { useAuth } from "@/hooks";
+import { useNavigate } from "react-router-dom";
 
-const AuthPage = () => {
+export const AuthPage = () => {
   const { login } = useAuth();
-  return <button onClick={login}>Realizar login</button>
-};
+  const navigate = useNavigate();
 
-export default AuthPage;
+  const handleSubmit = () => {
+    navigate('/');
+    login();
+  }
+
+  return <button onClick={handleSubmit}>Realizar login</button>
+};

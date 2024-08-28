@@ -1,6 +1,5 @@
-import { ReactNode, useCallback, useMemo, useState } from "react";
+import { ReactNode, useMemo, useState } from "react";
 import { AuthContext, AuthContextProps } from "@/contexts";
-import { useNavigate } from 'react-router-dom';
 
 interface AuthProviderProps {
   children: ReactNode
@@ -8,23 +7,20 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ ...props }: AuthProviderProps) => {
   const [logged, setLogged] = useState<boolean>(false);
-  const navigate = useNavigate();
 
-  const login = useCallback(() => {
-    setLogged(true)
-    navigate('/');
-  }, [navigate])
+  const login = () => {
+    setLogged(true);
+  }
 
-  const logout = useCallback(() => {
-    setLogged(false)
-    navigate('/auth');
-  }, [navigate])
+  const logout = () => {
+    setLogged(false);
+  }
 
   const AuthContextValue: AuthContextProps = useMemo(() => ({
     logged,
     login,
     logout,
-  }), [logged, login, logout])
+  }), [logged])
 
   return <AuthContext.Provider value={AuthContextValue} {...props} />
 }
