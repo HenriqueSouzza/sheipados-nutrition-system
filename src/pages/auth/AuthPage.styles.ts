@@ -10,7 +10,7 @@ export const Container = styled(ContainerComponent)({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  backgroundImage: 'linear-gradient(156.8deg, rgb(30, 144, 231) 27.1%, rgb(67, 101, 225) 77.8%)',
+  backgroundImage: 'linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%)',
 });
 
 export const Header = styled('div')({

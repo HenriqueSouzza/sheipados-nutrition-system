@@ -6,8 +6,12 @@ import {
 } from "@/components";
 import { AccountCircle } from '@/icons';
 import * as S from './AuthPage.styles';
+import { useAuthPage } from "./useAuthPage";
+import { Controller } from "react-hook-form";
 
 export const AuthPage = () => {
+  const { onSubmit, control } = useAuthPage();
+
   return (
     <S.Container>
       <S.Content>
@@ -15,21 +19,47 @@ export const AuthPage = () => {
           <S.Img alt="logo sheipados" width={50} src={`/logo.jpeg`} />
           <Typography variant="h6">Bem-vindo</Typography>
         </S.Header>
-        <S.Form>
-          <TextField
-            fullWidth
-            type="text"
-            label="username"
-            icon={<AccountCircle />}
-            placeholder="username"
+        <S.Form onSubmit={onSubmit}>
+          <Controller
+            name="username"
+            control={control}
+            rules={{ required: true }}
+            render={({ field, fieldState: { error } }) => (
+              <TextField
+                {...field}
+                fullWidth
+                label="username"
+                type="text"
+                placeholder="username"
+                icon={<AccountCircle />}
+                error={!!error}
+                helperText={error?.message}
+              />
+            )}
           />
-          <Password
-            fullWidth
-            type="password"
-            label="password"
-            placeholder="password"
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: true }}
+            render={({ field, fieldState: { error } }) => (
+              <Password
+                {...field}
+                fullWidth
+                type="password"
+                label="password"
+                placeholder="password"
+                error={!!error}
+                helperText={error?.message}
+              />
+            )}
           />
-          <Button variant="contained" type="submit" size="large">Login</Button>
+          <Button
+            variant="contained"
+            type="submit"
+            size="large"
+          >
+            Login
+          </Button>
         </S.Form>
       </S.Content>
     </S.Container>
