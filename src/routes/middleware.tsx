@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom"
-import { useAuth } from "../hooks"
+import { useAuth } from "@/hooks"
+import { RootLayout } from "@/pages/RootLayout";
 
 export const Middleware = () => {
   const { logged } = useAuth();
@@ -8,5 +9,9 @@ export const Middleware = () => {
     return <Navigate to="/auth" replace />
   }
 
-  return <Outlet />
+  return (
+    <RootLayout>
+      <Outlet />
+    </RootLayout>
+  )
 }

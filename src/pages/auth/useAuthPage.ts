@@ -1,3 +1,4 @@
+import { useAuth } from "@/hooks";
 import { useForm } from "react-hook-form";
 
 interface FormDataAuth {
@@ -12,9 +13,12 @@ export const useAuthPage = () => {
       password: ''
     }
   });
+  const { login } = useAuth();
+
 
   const onSubmit = (values: FormDataAuth) => {
     console.log(values)
+    login();
   }
 
   return {
