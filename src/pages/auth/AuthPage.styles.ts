@@ -1,11 +1,10 @@
 import {
-  Container as ContainerComponent,
   Image,
   Form as FormComponent,
 } from "@/components";
 import { styled } from '@mui/material/styles';
 
-export const Container = styled(ContainerComponent)({
+export const Container = styled('div')({
   height: '100vh',
   display: 'flex',
   justifyContent: 'center',
