@@ -8,18 +8,18 @@ interface AuthProviderProps {
 export const AuthProvider = ({ ...props }: AuthProviderProps) => {
   const [logged, setLogged] = useState<boolean>(false);
 
-  const login = () => {
+  const onLogin = () => {
     setLogged(true);
   }
 
-  const logout = () => {
+  const onLogout = () => {
     setLogged(false);
   }
 
   const AuthContextValue: AuthContextProps = useMemo(() => ({
     logged,
-    login,
-    logout,
+    onLogin,
+    onLogout,
   }), [logged])
 
   return <AuthContext.Provider value={AuthContextValue} {...props} />

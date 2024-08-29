@@ -13,12 +13,12 @@ export const useAuthPage = () => {
       password: ''
     }
   });
-  const { login } = useAuth();
+  const { onLogin } = useAuth();
 
 
   const onSubmit = (values: FormDataAuth) => {
     console.log(values)
-    login();
+    onLogin();
   }
 
   return {
