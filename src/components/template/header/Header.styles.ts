@@ -1,11 +1,10 @@
 import { styled } from "@mui/material";
 
 export const Header = styled('header')(({ theme }) => ({
-  width: 'calc(100% - 250px)',
-  background: '#bae1ff',
-  height: 60,
-  position: "fixed",
-  right: 0,
+  color: '#ECDFCC',
+  width: '100%',
+  background: '#1E201E',
+  height: 80,
   [theme.breakpoints.down('sm')]: {
     width: '100%',
   },
