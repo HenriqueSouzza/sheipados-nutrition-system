@@ -3,7 +3,7 @@ import { useAuth } from "@/hooks"
 import { RootLayout } from "@/layouts";
 import { Paths } from "@/config";
 
-export const Middleware = () => {
+export const MiddlewareRoutes = () => {
   const { logged } = useAuth();
 
   if (!logged) {

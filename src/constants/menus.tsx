@@ -1,6 +1,7 @@
 import { Paths } from "@/config";
 import { MenuItemProps } from "@/interface";
-import { Dashboard, ListAlt } from "@mui/icons-material";
+import { Dashboard, ListAlt, People, Inventory, Assignment } from "@/icons";
+
 
 export const Menus: Array<MenuItemProps> = [
   {
@@ -12,5 +13,20 @@ export const Menus: Array<MenuItemProps> = [
     path: Paths.PRODUCTS,
     label: 'Produtos',
     icon: <ListAlt />,
+  },
+  {
+    path: Paths.STOCK,
+    label: 'Estoque',
+    icon: <Inventory />,
+  },
+  {
+    path: Paths.USERS,
+    label: 'Usuários',
+    icon: <People />,
+  },
+  {
+    path: Paths.REPORTS,
+    label: 'Relatórios',
+    icon: <Assignment />,
   },
 ];

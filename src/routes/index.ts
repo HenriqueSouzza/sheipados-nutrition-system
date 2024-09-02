@@ -1,2 +1,2 @@
-export * from './middleware';
+export * from './MiddlewareRoutes';
 export * from './routes';
