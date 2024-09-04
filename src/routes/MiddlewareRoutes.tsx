@@ -6,7 +6,7 @@ import { Paths } from "@/config";
 export const MiddlewareRoutes = () => {
   const { logged } = useAuth();
 
-  if (logged) {
+  if (!logged) {
     return <Navigate to={Paths.AUTH} replace />
   }
 
