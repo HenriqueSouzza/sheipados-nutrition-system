@@ -2,9 +2,10 @@ import { Routes as Router, Route } from "react-router-dom"
 import { AuthPage, DashboardPage, NotFoundPage, ProductsPage, StockPage, UsersPage } from "@/pages"
 import { MiddlewareRoutes } from "./MiddlewareRoutes"
 import { Paths } from "@/config"
+import { ReportsPage } from "@/pages/reports"
 
 export const Routes = () => {
-  const { AUTH, ROOT, DASHBOARD, STOCK, PRODUCTS, USERS } = Paths;
+  const { AUTH, ROOT, DASHBOARD, STOCK, PRODUCTS, USERS, REPORTS } = Paths;
 
   return (
     <Router>
@@ -16,6 +17,7 @@ export const Routes = () => {
         <Route path={PRODUCTS} element={<ProductsPage />} />
         <Route path={STOCK} element={<StockPage />} />
         <Route path={USERS} element={<UsersPage />} />
+        <Route path={REPORTS} element={<ReportsPage />} />
       </Route>
     </Router>
   )

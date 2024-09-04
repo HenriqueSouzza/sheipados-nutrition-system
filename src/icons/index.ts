@@ -6,4 +6,5 @@ export {
   Inventory,
   Assignment,
   EditNote,
+  Close,
 } from "@mui/icons-material";

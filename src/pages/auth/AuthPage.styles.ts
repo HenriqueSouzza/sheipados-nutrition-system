@@ -34,6 +34,7 @@ export const Content = styled('div')(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     height: '100vh',
     width: '100%',
+    borderRadius: 0,
   },
 }));
 

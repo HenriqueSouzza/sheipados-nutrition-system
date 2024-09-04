@@ -1,1 +1,3 @@
-export * from './index';
+import { createTheme } from '@mui/material/styles';
+
+export const theme = createTheme();

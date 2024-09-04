@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { theme } from '@/themes';
-import { AuthProvider } from '@/providers';
+import { AuthProvider, ModalProvider } from '@/providers';
 import { Routes } from '@/routes';
 
 const App = () => (
@@ -10,7 +10,9 @@ const App = () => (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<AuthProvider>
-				<Routes />
+				<ModalProvider>
+					<Routes />
+				</ModalProvider>
 			</AuthProvider>
 		</ThemeProvider>
 	</Suspense>
