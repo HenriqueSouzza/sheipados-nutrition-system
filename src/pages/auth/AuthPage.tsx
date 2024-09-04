@@ -1,7 +1,6 @@
 import {
   TextField,
   Password,
-  Button,
   Typography,
 } from "@/components";
 import { AccountCircle } from '@/icons';
@@ -53,13 +52,13 @@ export const AuthPage = () => {
               />
             )}
           />
-          <Button
+          <S.Button
             variant="contained"
             type="submit"
             size="large"
           >
             Login
-          </Button>
+          </S.Button>
         </S.Form>
       </S.Content>
     </S.Container>

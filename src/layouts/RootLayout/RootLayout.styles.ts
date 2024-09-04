@@ -14,7 +14,7 @@ export const Main = styled('div')({
 });
 
 export const Content = styled('section')({
-  background: '#3C3D37',
+  background: '#DADADA',
   height: 'calc(100% - 80px)',
   padding: 10,
 });

@@ -1,22 +1,22 @@
 import { ReactNode } from "react";
 import * as S from './RootLayout.styles';
-import { useAuth } from "@/hooks";
 import { Menus } from "@/constants";
 import { Sidebar } from "../Sidebar";
 import { Header } from "../Header";
+import { useRootLayout } from "./useRootLayout";
 
 interface RootLayoutProps {
   children: ReactNode
 }
 
 export const RootLayout = ({ children }: RootLayoutProps) => {
-  const { onLogout } = useAuth();
+  const { onLogout, handleSidebar, hiddenSidebar } = useRootLayout();
 
   return (
     <S.Container>
-      <Sidebar items={Menus} />
+      <Sidebar onSidebar={handleSidebar} hidden={hiddenSidebar} items={Menus} />
       <S.Main>
-        <Header onLogout={onLogout} />
+        <Header onSidebar={handleSidebar} onLogout={onLogout} />
         <S.Content>
           {children}
         </S.Content>

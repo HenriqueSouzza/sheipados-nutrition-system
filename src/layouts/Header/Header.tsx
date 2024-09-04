@@ -1,17 +1,20 @@
-import { Button } from '@/components';
 import * as S from './Header.styles';
-import { Login } from '@mui/icons-material';
+import { Login, Menu } from '@/icons';
 
 interface HeaderProps {
   onLogout: () => void
+  onSidebar: () => void
 }
 
-export const Header = ({ onLogout }: HeaderProps) => {
+export const Header = ({ onLogout, onSidebar }: HeaderProps) => {
   return (
     <S.Header>
-      <Button onClick={onLogout}>
+      <S.ButtonMenu onClick={onSidebar}>
+        <Menu />
+      </S.ButtonMenu>
+      <S.Button onClick={onLogout}>
         <Login />
-      </Button>
+      </S.Button>
     </S.Header>
   )
 }

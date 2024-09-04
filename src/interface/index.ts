@@ -1,2 +1,2 @@
-export * from './menu';
+export type { MenuItemProps } from './menu';
 export * from './products';

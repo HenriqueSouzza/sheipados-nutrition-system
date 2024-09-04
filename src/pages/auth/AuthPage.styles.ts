@@ -1,6 +1,7 @@
 import {
   Image,
   Form as FormComponent,
+  Button as ButtonComponent,
 } from "@/components";
 import { styled } from '@mui/material/styles';
 
@@ -45,3 +46,7 @@ export const Form = styled(FormComponent)({
   gap: 20,
 });
 
+export const Button = styled(ButtonComponent)({
+  width: 100,
+  height: 56,
+});

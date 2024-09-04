@@ -5,7 +5,3 @@ export interface MenuItemProps {
   label: string
   icon: ReactNode
 }
-
-export interface MenuProps {
-  items?: Array<MenuItemProps>
-}
