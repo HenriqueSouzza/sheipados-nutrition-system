@@ -2,6 +2,7 @@ import {
   TextField,
   Password,
   Typography,
+  Loading,
 } from "@/components";
 import { AccountCircle } from '@/icons';
 import * as S from './AuthPage.styles';
@@ -9,7 +10,11 @@ import { useAuthPage } from "./useAuthPage";
 import { Controller } from "react-hook-form";
 
 export const AuthPage = () => {
-  const { onSubmit, control } = useAuthPage();
+  const { onSubmit, control, loading } = useAuthPage();
+
+  if (loading) {
+    return <Loading />
+  }
 
   return (
     <S.Container>

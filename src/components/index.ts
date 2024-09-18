@@ -6,3 +6,4 @@ export * from './typography';
 export * from './card';
 export * from './table';
 export * from './modal';
+export * from './Loading';

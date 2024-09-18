@@ -1,7 +1,7 @@
 import { styled, Typography } from "@mui/material";
 
 export const DisplayLogo = styled('div')(({ theme }) => ({
-  height: 80,
+  height: 60,
   textAlign: 'center',
   display: 'flex',
   alignItems: "center",
@@ -23,8 +23,8 @@ export const Sidebar = styled('nav')<{ hidden?: boolean }>(({ theme, hidden }) =
     position: 'absolute',
     width: '100%',
     zIndex: 10,
-    height: 'calc(100vh - 64px)',
-    top: 80,
+    height: 'calc(100vh - 60px)',
+    top: 60,
   },
   marginLeft: hidden ? '-100%' : 0,
 }));
@@ -40,7 +40,7 @@ export const Menu = styled('ul')({
 });
 
 export const MenuItem = styled('li')({
-  padding: 10,
+  padding: '10px 20px',
   cursor: "pointer",
   display: "flex",
   gap: 8,

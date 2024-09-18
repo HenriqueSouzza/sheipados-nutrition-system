@@ -24,7 +24,7 @@ export const AuthProvider = ({ ...props }: AuthProviderProps) => {
     if (accessToken) {
       AuthActions.profile(dispatch, accessToken)
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     onProfile()
@@ -34,8 +34,7 @@ export const AuthProvider = ({ ...props }: AuthProviderProps) => {
     ...state,
     onLogin,
     onLogout,
-    onProfile,
-  }), [state, onProfile]);
+  }), [state]);
 
   return <AuthContext.Provider value={AuthContextValue} {...props} />
 }

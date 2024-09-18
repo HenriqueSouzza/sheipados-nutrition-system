@@ -17,13 +17,13 @@ export const useAuthPage = () => {
       password: ''
     }
   });
-  const { onLogin, user } = useAuth();
+  const { onLogin, user, loading } = useAuth();
 
   useEffect(() => {
     if (user.authenticated) {
       navigate(Paths.ROOT);
     }
-  }, [user, navigate])
+  }, [user, navigate]);
 
   const onSubmit = ({ username, password }: FormDataProps) => {
     onLogin(username, password);
@@ -31,6 +31,7 @@ export const useAuthPage = () => {
 
   return {
     onSubmit: handleSubmit(onSubmit),
+    loading,
     control,
   }
 }

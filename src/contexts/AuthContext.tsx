@@ -9,7 +9,6 @@ export interface AuthContextProps {
   error: string | boolean
   onLogin: (username: string, password: string) => void
   onLogout: () => void
-  onProfile: () => void
 }
 
 const AuthContextValues: AuthContextProps = {
@@ -18,7 +17,6 @@ const AuthContextValues: AuthContextProps = {
   error: false,
   onLogin: () => '',
   onLogout: () => '',
-  onProfile: () => ''
 }
 
 export const AuthContext = createContext(AuthContextValues);

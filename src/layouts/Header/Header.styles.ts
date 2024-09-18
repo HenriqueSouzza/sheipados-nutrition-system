@@ -5,14 +5,15 @@ export const Header = styled('header')({
   color: '#ECDFCC',
   width: '100%',
   background: '#194169',
-  height: 80,
-  padding: 10,
+  height: 60,
+  padding: 20,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
 });
 
 export const Button = styled(ButtonComponent)({
+  cursor: 'pointer',
   padding: 0,
   margin: 0,
   svg: {

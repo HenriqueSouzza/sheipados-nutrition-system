@@ -10,13 +10,13 @@ interface RootLayoutProps {
 }
 
 export const RootLayout = ({ children }: RootLayoutProps) => {
-  const { onLogout, handleSidebar, hiddenSidebar } = useRootLayout();
+  const { handleSidebar, handleHiddenSidebar, hiddenSidebar } = useRootLayout();
 
   return (
     <S.Container>
       <Sidebar onSidebar={handleSidebar} hidden={hiddenSidebar} items={Menus} />
       <S.Main>
-        <Header onSidebar={handleSidebar} onLogout={onLogout} />
+        <Header onSidebar={handleSidebar} handleHiddenSidebar={handleHiddenSidebar} />
         <S.Content>
           {children}
         </S.Content>

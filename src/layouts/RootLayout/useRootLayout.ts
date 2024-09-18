@@ -1,23 +1,31 @@
-import { useAuth } from "@/hooks";
 import { useTheme } from "@emotion/react";
 import { Theme, useMediaQuery } from "@mui/material";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useRootLayout = () => {
-  const { onLogout } = useAuth();
   const theme = useTheme() as Theme;
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
   const [hiddenSidebar, setHiddenSidebar] = useState<boolean>(false);
 
+  useEffect(() => {
+    if (isDesktop) {
+      setHiddenSidebar(false);
+    }
+  }, [isDesktop, hiddenSidebar]);
+
   const handleSidebar = useCallback(() => {
-    if (isMobile) {
+    if (!isDesktop) {
       setHiddenSidebar(!hiddenSidebar);
     }
-  }, [isMobile, hiddenSidebar]);
+  }, [hiddenSidebar, isDesktop]);
+
+  const handleHiddenSidebar = () => {
+    setHiddenSidebar(true)
+  }
 
   return {
-    onLogout,
     handleSidebar,
+    handleHiddenSidebar,
     hiddenSidebar,
   }
 }
