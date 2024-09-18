@@ -1,6 +1,6 @@
 import { ReactNode, useCallback, useEffect, useMemo, useReducer } from "react";
 import { AuthContext, AuthContextProps } from "@/contexts";
-import { AuthActions, AuthReducer, InitialState } from "@/reducer";
+import { AuthActions, AuthReducer, InitialStateAuth } from "@/reducer";
 import Cookies from "js-cookie";
 
 interface AuthProviderProps {
@@ -8,7 +8,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ ...props }: AuthProviderProps) => {
-  const [state, dispatch] = useReducer(AuthReducer, InitialState);
+  const [state, dispatch] = useReducer(AuthReducer, InitialStateAuth);
 
   const onLogin = async (username: string, password: string) => {
     AuthActions.login(dispatch, { username, password })
@@ -34,7 +34,8 @@ export const AuthProvider = ({ ...props }: AuthProviderProps) => {
     ...state,
     onLogin,
     onLogout,
-  }), [state]);
+    onProfile,
+  }), [state, onProfile]);
 
   return <AuthContext.Provider value={AuthContextValue} {...props} />
 }

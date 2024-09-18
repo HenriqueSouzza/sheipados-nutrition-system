@@ -1,20 +1,20 @@
 import { AuthActionProps } from "./AuthActions";
 import { LOGIN_FAILURE, LOGIN_PROFILE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./AuthTypes";
 
-export const InitialState = {
-  user: {},
+export const InitialStateAuth = {
+  profile: {},
   loading: true,
   error: false,
 };
 
-export const AuthReducer = (state = InitialState, action: AuthActionProps) => {
+export const AuthReducer = (state = InitialStateAuth, action: AuthActionProps) => {
   switch (action.type) {
     case LOGIN_PROFILE:
       return {
         ...state,
         loading: false,
-        user: {
-          ...state.user,
+        profile: {
+          ...state.profile,
           authenticated: true,
           ...action.payload
         },
@@ -28,8 +28,8 @@ export const AuthReducer = (state = InitialState, action: AuthActionProps) => {
       return {
         ...state,
         loading: false,
-        user: {
-          ...state.user,
+        profile: {
+          ...state.profile,
           authenticated: true,
           accessToken: action.payload
         }
@@ -43,7 +43,7 @@ export const AuthReducer = (state = InitialState, action: AuthActionProps) => {
     case LOGOUT:
       return {
         ...state,
-        user: {},
+        profile: {},
         loading: false,
         error: false
       };

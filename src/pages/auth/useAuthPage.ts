@@ -17,13 +17,13 @@ export const useAuthPage = () => {
       password: ''
     }
   });
-  const { onLogin, user, loading } = useAuth();
+  const { onLogin, profile, loading } = useAuth();
 
   useEffect(() => {
-    if (user.authenticated) {
+    if (profile.authenticated) {
       navigate(Paths.ROOT);
     }
-  }, [user, navigate]);
+  }, [profile, navigate]);
 
   const onSubmit = ({ username, password }: FormDataProps) => {
     onLogin(username, password);

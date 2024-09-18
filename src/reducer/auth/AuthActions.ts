@@ -2,14 +2,9 @@ import { Dispatch } from "react";
 import { LOGIN_FAILURE, LOGIN_PROFILE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./AuthTypes";
 import { authHttp } from "@/services";
 import Cookies from "js-cookie";
+import { ActionProps } from "@/interface";
 
-export interface AuthActionProps {
-  type: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload?: any
-}
-
-export const login = async (dispatch: Dispatch<AuthActionProps>, { username, password }: { username: string; password: string }) => {
+export const login = async (dispatch: Dispatch<ActionProps>, { username, password }: { username: string; password: string }) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
     const response = await authHttp.login(username, password)
@@ -20,7 +15,7 @@ export const login = async (dispatch: Dispatch<AuthActionProps>, { username, pas
   }
 };
 
-export const profile = async (dispatch: Dispatch<AuthActionProps>, accessToken: string) => {
+export const profile = async (dispatch: Dispatch<ActionProps>, accessToken: string) => {
   dispatch({ type: LOGIN_REQUEST });
   try {
     const response = await authHttp.profile(accessToken);
@@ -30,7 +25,7 @@ export const profile = async (dispatch: Dispatch<AuthActionProps>, accessToken: 
   }
 };
 
-export const logout = (dispatch: Dispatch<AuthActionProps>) => {
+export const logout = (dispatch: Dispatch<ActionProps>) => {
   dispatch({ type: 'LOGOUT' });
 };
 
