@@ -1,26 +1,41 @@
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useCallback, useEffect, useMemo, useReducer } from "react";
 import { AuthContext, AuthContextProps } from "@/contexts";
+import { AuthActions, AuthReducer, InitialState } from "@/reducer";
+import Cookies from "js-cookie";
 
 interface AuthProviderProps {
   children: ReactNode
 }
 
 export const AuthProvider = ({ ...props }: AuthProviderProps) => {
-  const [logged, setLogged] = useState<boolean>(false);
+  const [state, dispatch] = useReducer(AuthReducer, InitialState);
 
-  const onLogin = () => {
-    setLogged(true);
+  const onLogin = async (username: string, password: string) => {
+    AuthActions.login(dispatch, { username, password })
   }
 
   const onLogout = () => {
-    setLogged(false);
+    Cookies.remove('accessToken')
+    AuthActions.logout(dispatch)
   }
 
+  const onProfile = useCallback(() => {
+    const accessToken = Cookies.get('accessToken')
+    if (accessToken) {
+      AuthActions.profile(dispatch, accessToken)
+    }
+  }, []);
+
+  useEffect(() => {
+    onProfile()
+  }, [onProfile]);
+
   const AuthContextValue: AuthContextProps = useMemo(() => ({
-    logged,
+    ...state,
     onLogin,
     onLogout,
-  }), [logged])
+    onProfile,
+  }), [state, onProfile]);
 
   return <AuthContext.Provider value={AuthContextValue} {...props} />
 }

@@ -48,5 +48,4 @@ export const Form = styled(FormComponent)({
 
 export const Button = styled(ButtonComponent)({
   width: 100,
-  height: 56,
 });

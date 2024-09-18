@@ -1,5 +1,6 @@
 import { Paths } from "@/config";
 import { useAuth } from "@/hooks";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -16,13 +17,16 @@ export const useAuthPage = () => {
       password: ''
     }
   });
-  const { onLogin } = useAuth();
+  const { onLogin, user } = useAuth();
 
+  useEffect(() => {
+    if (user.authenticated) {
+      navigate(Paths.ROOT);
+    }
+  }, [user, navigate])
 
-  const onSubmit = (values: FormDataProps) => {
-    console.log(values)
-    onLogin();
-    navigate(Paths.ROOT);
+  const onSubmit = ({ username, password }: FormDataProps) => {
+    onLogin(username, password);
   }
 
   return {

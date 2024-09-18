@@ -1,15 +1,24 @@
 import { createContext } from "react";
 
 export interface AuthContextProps {
-  logged: boolean
-  onLogin: () => void
+  user: {
+    accessToken?: string
+    authenticated?: boolean
+  }
+  loading: boolean
+  error: string | boolean
+  onLogin: (username: string, password: string) => void
   onLogout: () => void
+  onProfile: () => void
 }
 
 const AuthContextValues: AuthContextProps = {
-  logged: false,
+  user: {},
+  loading: true,
+  error: false,
   onLogin: () => '',
-  onLogout: () => ''
+  onLogout: () => '',
+  onProfile: () => ''
 }
 
 export const AuthContext = createContext(AuthContextValues);
