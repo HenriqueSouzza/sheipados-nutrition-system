@@ -1,4 +1,4 @@
-import { AuthActionProps } from "./UserActions";
+import { ActionProps } from "@/interface";
 import { USER_FAILURE, USER_REQUEST, USER_UPDATE_SUCCESS } from "./UserTypes";
 
 export const InitialStateUser = {
@@ -7,7 +7,7 @@ export const InitialStateUser = {
   error: false,
 };
 
-export const UserReducer = (state = InitialStateUser, action: AuthActionProps) => {
+export const UserReducer = (state = InitialStateUser, action: ActionProps) => {
   switch (action.type) {
     case USER_REQUEST:
       return {

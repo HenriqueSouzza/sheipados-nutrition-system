@@ -1,4 +1,4 @@
-import { AuthActionProps } from "./AuthActions";
+import { ActionProps } from "@/interface";
 import { LOGIN_FAILURE, LOGIN_PROFILE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./AuthTypes";
 
 export const InitialStateAuth = {
@@ -7,7 +7,7 @@ export const InitialStateAuth = {
   error: false,
 };
 
-export const AuthReducer = (state = InitialStateAuth, action: AuthActionProps) => {
+export const AuthReducer = (state = InitialStateAuth, action: ActionProps) => {
   switch (action.type) {
     case LOGIN_PROFILE:
       return {
