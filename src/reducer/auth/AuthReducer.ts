@@ -3,7 +3,7 @@ import { LOGIN_FAILURE, LOGIN_PROFILE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } fr
 
 export const InitialStateAuth = {
   profile: {},
-  loading: true,
+  loading: false,
   error: false,
 };
 
