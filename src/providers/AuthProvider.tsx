@@ -16,6 +16,7 @@ export const AuthProvider = ({ ...props }: AuthProviderProps) => {
 
   const onLogout = () => {
     Cookies.remove('accessToken')
+    Cookies.remove('authenticated')
     AuthActions.logout(dispatch)
   }
 

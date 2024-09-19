@@ -1,8 +1,12 @@
 import { ActionProps } from "@/interface";
 import { LOGIN_FAILURE, LOGIN_PROFILE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./AuthTypes";
+import Cookies from "js-cookie";
 
 export const InitialStateAuth = {
-  profile: {},
+  profile: {
+    accessToken: Cookies.get('accessToken'),
+    authenticated: Cookies.get('authenticated') === 'true',
+  },
   loading: false,
   error: false,
 };

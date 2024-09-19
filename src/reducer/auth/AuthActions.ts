@@ -9,6 +9,7 @@ export const login = async (dispatch: Dispatch<ActionProps>, { username, passwor
   try {
     const response = await authHttp.login(username, password)
     Cookies.set('accessToken', response.data.access_token, { expires: 1, path: '' });
+    Cookies.set('authenticated', 'true', { expires: 1, path: '' });
     dispatch({ type: LOGIN_SUCCESS, payload: response.data.access_token });
   } catch {
     dispatch({ type: LOGIN_FAILURE, payload: 'error' });
