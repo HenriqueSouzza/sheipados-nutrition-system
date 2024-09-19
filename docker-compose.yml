@@ -3,9 +3,7 @@ version: '3.4'
 services:
   sheipados-nutrition-react:
     container_name: sheipados-nutrition-react
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    build: .
     volumes:
       - './:/app'
     network_mode: "host"
