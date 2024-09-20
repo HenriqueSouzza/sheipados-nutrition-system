@@ -25,7 +25,8 @@ const FieldForm = memo(({ control, rules, name = 'username', label, type, placeh
 ))
 
 export const ProfilePage = () => {
-  const { onSubmit, fieldsForm } = useProfilePage();
+  const { onSubmit, fieldsForm, loading } = useProfilePage();
+
   return (
     <S.Container>
       <S.TitlePage>Meu perfil</S.TitlePage>
@@ -40,6 +41,7 @@ export const ProfilePage = () => {
           variant="contained"
           type="submit"
           size="large"
+          disabled={loading}
         >
           Salvar
         </S.Button>

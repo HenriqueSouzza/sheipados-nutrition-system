@@ -1,5 +1,5 @@
 import { ActionProps } from "@/interface";
-import { LOGIN_FAILURE, LOGIN_PROFILE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./AuthTypes";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./AuthTypes";
 import Cookies from "js-cookie";
 
 export const InitialStateAuth = {
@@ -13,16 +13,6 @@ export const InitialStateAuth = {
 
 export const AuthReducer = (state = InitialStateAuth, action: ActionProps) => {
   switch (action.type) {
-    case LOGIN_PROFILE:
-      return {
-        ...state,
-        loading: false,
-        profile: {
-          ...state.profile,
-          authenticated: true,
-          ...action.payload
-        },
-      }
     case LOGIN_REQUEST:
       return {
         ...state,
@@ -34,8 +24,7 @@ export const AuthReducer = (state = InitialStateAuth, action: ActionProps) => {
         loading: false,
         profile: {
           ...state.profile,
-          authenticated: true,
-          accessToken: action.payload
+          ...action.payload
         }
       };
     case LOGIN_FAILURE:

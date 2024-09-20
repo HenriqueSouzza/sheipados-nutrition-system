@@ -3,7 +3,7 @@ import { USER_FAILURE, USER_REQUEST, USER_UPDATE_SUCCESS } from "./UserTypes";
 
 export const InitialStateUser = {
   user: {},
-  loading: true,
+  loading: false,
   error: false,
 };
 

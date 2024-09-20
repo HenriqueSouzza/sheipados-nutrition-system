@@ -12,12 +12,9 @@ import { Controller } from "react-hook-form";
 export const AuthPage = () => {
   const { onSubmit, control, loading } = useAuthPage();
 
-  if (loading) {
-    return <Loading />
-  }
-
   return (
     <S.Container>
+      {loading ? (<Loading />) : null}
       <S.Content>
         <S.Header>
           <S.Img alt="logo sheipados" width={50} src={`/logo.jpeg`} />

@@ -29,7 +29,7 @@ export const AuthProvider = ({ ...props }: AuthProviderProps) => {
 
   useEffect(() => {
     onProfile()
-  }, [onProfile]);
+  }, [onProfile, state.profile.accessToken]);
 
   const AuthContextValue: AuthContextProps = useMemo(() => ({
     ...state,

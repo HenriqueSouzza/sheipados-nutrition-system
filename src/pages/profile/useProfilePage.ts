@@ -21,9 +21,9 @@ export interface FieldFormProps extends InputHTMLAttributes<HTMLInputElement> {
 interface ListFieldFormProps extends Array<FieldFormProps> { }
 
 export const useProfilePage = () => {
-  const { profile: { name, email, username }, onProfile } = useAuth();
+  const { profile: { name, email, username } } = useAuth();
   const { onUpdate, loading } = useUser()
-  const { handleSubmit, control } = useForm<ProfileFormDataProps>({
+  const { handleSubmit, control, reset } = useForm<ProfileFormDataProps>({
     defaultValues: {
       name,
       username,
@@ -31,6 +31,14 @@ export const useProfilePage = () => {
       password: '',
     }
   });
+
+  useEffect(() => {
+    reset({
+      name,
+      email,
+      username
+    });
+  }, [reset, name, email, username])
 
   const fieldsForm: ListFieldFormProps = [
     {
@@ -66,18 +74,13 @@ export const useProfilePage = () => {
     },
   ]
 
-  useEffect(() => {
-    if (!loading) {
-      onProfile()
-    }
-  }, [loading, onProfile])
-
   const onSubmit = ({ name, username }: ProfileFormDataProps) => {
     onUpdate({ username, data: { name } });
   }
 
   return {
     onSubmit: handleSubmit(onSubmit),
-    fieldsForm
+    fieldsForm,
+    loading,
   }
 }
