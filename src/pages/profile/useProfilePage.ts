@@ -13,6 +13,8 @@ export interface FieldFormProps extends InputHTMLAttributes<HTMLInputElement> {
   control: Control<ProfileFormDataProps>
   label: string
   name: keyof ProfileFormDataProps
+  readonly?: boolean
+  value?: string
   rules?: {
     required: boolean
   }
@@ -21,14 +23,13 @@ export interface FieldFormProps extends InputHTMLAttributes<HTMLInputElement> {
 interface ListFieldFormProps extends Array<FieldFormProps> { }
 
 export const useProfilePage = () => {
-  const { profile: { name, email, username } } = useAuth();
+  const { profile: { name, email, username, firstLogin } } = useAuth();
   const { onUpdate, loading } = useUser()
   const { handleSubmit, control, reset } = useForm<ProfileFormDataProps>({
     defaultValues: {
       name,
       username,
       email,
-      password: '',
     }
   });
 
@@ -42,18 +43,20 @@ export const useProfilePage = () => {
 
   const fieldsForm: ListFieldFormProps = [
     {
-      label: 'username',
+      label: 'Username',
       name: 'username',
       type: 'text',
-      disabled: true,
+      readOnly: true,
       placeholder: "username",
+      value: username,
       control,
     },
     {
-      label: 'email',
+      label: 'Email',
       name: 'email',
       type: 'text',
-      disabled: true,
+      readOnly: true,
+      value: email,
       placeholder: "email",
       control,
     },
@@ -68,14 +71,17 @@ export const useProfilePage = () => {
     {
       label: 'Senha',
       name: 'password',
-      type: 'text',
-      placeholder: "senha",
+      type: 'password',
+      readOnly: !firstLogin,
+      value: '*******',
+      rules: { required: true },
+      placeholder: "digite sua senha",
       control,
     },
-  ]
+  ];
 
-  const onSubmit = ({ name, username }: ProfileFormDataProps) => {
-    onUpdate({ username, data: { name } });
+  const onSubmit = ({ name, username, password }: ProfileFormDataProps) => {
+    onUpdate({ username, data: { name, password } });
   }
 
   return {
