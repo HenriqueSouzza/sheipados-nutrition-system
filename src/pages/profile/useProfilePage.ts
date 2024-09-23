@@ -42,9 +42,10 @@ const notificationsListUsers = {
 
 export const useProfilePage = () => {
   const navigate = useNavigate();
-  const { profile: { name, email, username, firstLogin }, onProfile } = useAuth();
+  const { profile: { name, email, username, firstLogin }, onProfile, loading: loadingAuth } = useAuth();
   const { handleNotification } = useNotification();
-  const { onUpdate, loading, error } = useUser()
+  const { onUpdate, loading: loadingUser, error } = useUser();
+  const loading = loadingUser || loadingAuth;
   const { handleSubmit, control, reset, formState: { isDirty } } = useForm<ProfileFormDataProps>({
     defaultValues: {
       name,
