@@ -4,7 +4,7 @@ import { ChangeEvent, useEffect } from "react";
 
 export const useUsersPage = () => {
   const { handleModal } = useModal();
-  const { userList, onGet } = useUser();
+  const { userList, onGet, loading } = useUser();
 
   useEffect(() => {
     onGet({})
@@ -46,5 +46,6 @@ export const useUsersPage = () => {
       onSubmitNewProduct,
       handleModal,
     },
+    loading,
   }
 }
