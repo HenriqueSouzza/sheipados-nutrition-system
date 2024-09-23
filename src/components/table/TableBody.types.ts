@@ -6,7 +6,7 @@ export interface ColumnsProps {
 
 export interface TableBodyProps {
   columns: ColumnsProps
-  rows: Array<RowProps | object>
+  rows: Array<RowProps>
   onEdit: (item: RowProps) => void
   onDelete: (item: RowProps) => void
 }

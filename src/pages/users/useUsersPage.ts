@@ -37,7 +37,7 @@ export const useUsersPage = () => {
         firstLogin: 'Primeiro login',
         actions: 'Ações',
       },
-      rows: userList,
+      rows: userList as Array<{ [key: string]: string }>,
       onEdit: onDeleteUser,
       onDelete: onEditUser,
     },
