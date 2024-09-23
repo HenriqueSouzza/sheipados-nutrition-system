@@ -9,7 +9,7 @@ export const update = async (dispatch: Dispatch<ActionProps>, username: string, 
     const response = await userHttp.update(username, data, accessToken)
     dispatch({ type: USER_UPDATE_SUCCESS, payload: response.data });
   } catch {
-    dispatch({ type: USER_FAILURE, payload: 'error' });
+    dispatch({ type: USER_FAILURE, payload: { error: true } });
   }
 };
 

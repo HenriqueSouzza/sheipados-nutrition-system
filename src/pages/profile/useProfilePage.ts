@@ -1,6 +1,8 @@
-import { useAuth, useUser } from "@/hooks";
-import { InputHTMLAttributes, useEffect } from "react";
+import { Paths } from "@/config";
+import { useAuth, useNotification, useUser } from "@/hooks";
+import { InputHTMLAttributes, useCallback, useEffect } from "react";
 import { Control, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export interface ProfileFormDataProps {
   name: string
@@ -23,9 +25,11 @@ export interface FieldFormProps extends InputHTMLAttributes<HTMLInputElement> {
 interface ListFieldFormProps extends Array<FieldFormProps> { }
 
 export const useProfilePage = () => {
+  const navigate = useNavigate();
   const { profile: { name, email, username, firstLogin } } = useAuth();
-  const { onUpdate, loading } = useUser()
-  const { handleSubmit, control, reset } = useForm<ProfileFormDataProps>({
+  const { handleNotification } = useNotification();
+  const { onUpdate, loading, error } = useUser()
+  const { handleSubmit, control, reset, formState: { isDirty } } = useForm<ProfileFormDataProps>({
     defaultValues: {
       name,
       username,
@@ -39,7 +43,7 @@ export const useProfilePage = () => {
       email,
       username
     });
-  }, [reset, name, email, username])
+  }, [reset, name, email, username]);
 
   const fieldsForm: ListFieldFormProps = [
     {
@@ -80,9 +84,25 @@ export const useProfilePage = () => {
     },
   ];
 
-  const onSubmit = ({ name, username, password }: ProfileFormDataProps) => {
+  const onSubmit = useCallback(({ name, username, password }: ProfileFormDataProps) => {
+    if (!isDirty) {
+      handleNotification({
+        type: 'info',
+        feedbackText: 'Nenhum campo foi alterado',
+      });
+      return;
+    }
+
     onUpdate({ username, data: { name, password } });
-  }
+    handleNotification({
+      type: error ? 'error' : 'success',
+      feedbackText: error ? 'Ocorreu um erro ao tentar atualizar os dados, informe o suporte!' : 'Dados atualizados com sucesso',
+    })
+
+    if (!error) {
+      navigate(Paths.ROOT);
+    }
+  }, [error, isDirty, handleNotification, onUpdate, navigate]);
 
   return {
     onSubmit: handleSubmit(onSubmit),

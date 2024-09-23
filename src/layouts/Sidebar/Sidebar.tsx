@@ -9,6 +9,7 @@ interface MenuProps {
 
 interface SidebarProps extends MenuProps {
   hidden: boolean
+  username: string
 }
 
 const Menu = ({ items, onSidebar }: MenuProps) => (
@@ -24,9 +25,9 @@ const Menu = ({ items, onSidebar }: MenuProps) => (
   </S.Menu>
 );
 
-export const Sidebar = ({ items, hidden, onSidebar }: SidebarProps) => (
+export const Sidebar = ({ items, hidden, onSidebar, username }: SidebarProps) => (
   <S.Sidebar hidden={hidden}>
-    <S.DisplayLogo>logo</S.DisplayLogo>
+    <S.DisplayLogo>{username}</S.DisplayLogo>
     <Menu onSidebar={onSidebar} items={items} />
   </S.Sidebar>
 );

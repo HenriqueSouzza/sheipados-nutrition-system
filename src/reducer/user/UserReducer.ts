@@ -18,6 +18,8 @@ export const UserReducer = (state = InitialStateUser, action: ActionProps) => {
       return {
         ...state,
         loading: false,
+        error: false,
+        user: action.payload
       };
     case USER_FAILURE:
       return {

@@ -1,8 +1,8 @@
-import { Password, TextField } from '@/components';
 import * as S from './ProfilePage.styles';
 import { FieldFormProps, useProfilePage } from './useProfilePage';
 import { Controller } from 'react-hook-form';
 import { memo } from 'react';
+import { Password, TextField } from '@/components';
 
 const FieldForm = memo(({ control, rules, name = 'username', label, type, placeholder, disabled }: FieldFormProps) => (
   <Controller
@@ -47,7 +47,7 @@ const FieldText = ({ value, label }: FieldFormProps) => {
 }
 
 export const ProfilePage = () => {
-  const { onSubmit, fieldsForm } = useProfilePage();
+  const { onSubmit, fieldsForm, loading } = useProfilePage();
 
   return (
     <S.Container>
@@ -62,7 +62,7 @@ export const ProfilePage = () => {
               {...field}
             />
           ))}
-          <S.Button variant='contained' type='submit' size='small'>Salvar</S.Button>
+          <S.Button disabled={loading} variant='contained' type='submit' size='small'>Salvar</S.Button>
         </S.Form>
       </S.Section>
     </S.Container>
