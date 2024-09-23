@@ -1,14 +1,14 @@
 import * as S from './ProductsPage.styles';
 import { useProductsPage } from './useProductsPage';
-import { ProductList, SearchBar } from './components';
+import { SearchBar } from './components';
 
 export const ProductsPage = () => {
-  const { dataTable, searchBar } = useProductsPage();
+  const { searchBar } = useProductsPage();
 
   return (
     <S.Container>
       <SearchBar {...searchBar} />
-      <ProductList {...dataTable} />
+      {/* <ProductList {...dataTable} /> */}
     </S.Container>
   );
 };

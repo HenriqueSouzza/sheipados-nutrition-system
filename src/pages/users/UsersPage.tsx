@@ -1,14 +1,18 @@
 import { useUsersPage } from './useUsersPage';
-import { ProductList, SearchBar } from '../products/components';
 import * as S from './UsersPage.styles';
+import { Table, TableBody, TableHead } from '@/components';
 
 export const UsersPage = () => {
-  const { dataTable, searchBar } = useUsersPage();
+  const { dataTable } = useUsersPage();
 
   return (
     <S.Container>
-      <SearchBar {...searchBar} />
-      <ProductList {...dataTable} />
+      <S.TableContainer>
+        <Table>
+          <TableHead columns={dataTable.columns} />
+          <TableBody {...dataTable} />
+        </Table>
+      </S.TableContainer>
     </S.Container>
   )
 };

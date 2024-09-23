@@ -1,49 +1,45 @@
-import { useModal } from "@/hooks";
-import { ProductsProps } from "@/interface";
-import { ChangeEvent } from "react";
-
-interface DataProductProps {
-  productCode: string
-  productName: string
-}
+import { useModal, useUser } from "@/hooks";
+import { UserDataProps } from "@/interface";
+import { ChangeEvent, useEffect } from "react";
 
 export const useUsersPage = () => {
   const { handleModal } = useModal();
-  const productList = [
-    {
-      productCode: '123456789',
-      productName: 'Whey Protein'
-    },
-  ];
+  const { userList, onGet } = useUser();
+
+  useEffect(() => {
+    onGet({})
+  }, [onGet]);
 
   const onChangeFilterBy = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     console.log('filter by', value)
   }
 
-  const onSubmitDeleteProduct = (value: DataProductProps) => {
+  const onDeleteUser = (value: UserDataProps) => {
     console.log('delete', value)
   }
 
-  const onSubmitEditProduct = (values: DataProductProps) => {
+  const onEditUser = (values: UserDataProps) => {
     console.log('editar', values);
   }
 
-  const onSubmitNewProduct = (values: DataProductProps) => {
+  const onSubmitNewProduct = (values: UserDataProps) => {
     console.log('criar', values);
   }
 
   return {
     dataTable: {
       columns: {
-        productCode: 'Código',
-        productName: 'Nome do produto',
-        actions: 'Actions',
+        name: 'Nome Completo',
+        username: 'Usuário',
+        email: 'E-mail',
+        isActive: 'Ativo',
+        firstLogin: 'Primeiro login',
+        actions: 'Ações',
       },
-      rows: productList as Array<ProductsProps>,
-      onSubmitEditProduct,
-      onSubmitDeleteProduct,
-      handleModal,
+      rows: userList,
+      onEdit: onDeleteUser,
+      onDelete: onEditUser,
     },
     searchBar: {
       onChangeFilterBy,

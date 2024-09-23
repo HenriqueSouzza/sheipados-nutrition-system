@@ -9,4 +9,5 @@ export {
   Close,
   Login,
   Menu,
+  Delete,
 } from "@mui/icons-material";

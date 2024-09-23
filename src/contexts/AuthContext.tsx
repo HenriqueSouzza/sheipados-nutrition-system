@@ -1,14 +1,8 @@
 import { createContext } from "react";
+import { ProfileDataProps } from "@/interface";
 
 export interface AuthContextProps {
-  profile: {
-    accessToken?: string
-    authenticated?: boolean
-    firstLogin?: boolean
-    email?: string
-    username?: string
-    name?: string
-  }
+  profile: ProfileDataProps
   loading: boolean
   error: string | boolean
   onLogin: (username: string, password: string) => void
