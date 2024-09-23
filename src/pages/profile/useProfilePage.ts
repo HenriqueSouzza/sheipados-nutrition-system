@@ -36,7 +36,7 @@ const notificationsListUsers = {
   },
   info: {
     type: 'info',
-    feedback: 'Nenhum campo foi alterado',
+    feedbackText: 'Nenhum campo foi alterado',
   }
 }
 
