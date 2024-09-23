@@ -1,5 +1,6 @@
 import { Paths } from "@/config";
 import { useAuth, useNotification, useUser } from "@/hooks";
+import { AlertProps } from "@mui/material";
 import { InputHTMLAttributes, useCallback, useEffect } from "react";
 import { Control, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -24,9 +25,24 @@ export interface FieldFormProps extends InputHTMLAttributes<HTMLInputElement> {
 
 interface ListFieldFormProps extends Array<FieldFormProps> { }
 
+const notificationsListUsers = {
+  error: {
+    type: 'error',
+    feedbackText: 'Ocorreu um erro ao tentar atualizar os dados, informe o suporte!',
+  },
+  success: {
+    type: 'success',
+    feedbackText: 'Dados atualizados com sucesso'
+  },
+  info: {
+    type: 'info',
+    feedback: 'Nenhum campo foi alterado',
+  }
+}
+
 export const useProfilePage = () => {
   const navigate = useNavigate();
-  const { profile: { name, email, username, firstLogin } } = useAuth();
+  const { profile: { name, email, username, firstLogin }, onProfile } = useAuth();
   const { handleNotification } = useNotification();
   const { onUpdate, loading, error } = useUser()
   const { handleSubmit, control, reset, formState: { isDirty } } = useForm<ProfileFormDataProps>({
@@ -84,25 +100,30 @@ export const useProfilePage = () => {
     },
   ];
 
-  const onSubmit = useCallback(({ name, username, password }: ProfileFormDataProps) => {
-    if (!isDirty) {
-      handleNotification({
-        type: 'info',
-        feedbackText: 'Nenhum campo foi alterado',
-      });
-      return;
-    }
+  const setNotification = useCallback((type: 'info' | 'success' | 'error') => {
+    handleNotification(notificationsListUsers[type] as { type: AlertProps['color'], feedbackText: string });
+  }, [handleNotification]);
 
-    onUpdate({ username, data: { name, password } });
-    handleNotification({
-      type: error ? 'error' : 'success',
-      feedbackText: error ? 'Ocorreu um erro ao tentar atualizar os dados, informe o suporte!' : 'Dados atualizados com sucesso',
-    })
-
-    if (!error) {
+  const refreshProfile = useCallback(() => {
+    try {
+      onProfile()
+    } finally {
       navigate(Paths.ROOT);
     }
-  }, [error, isDirty, handleNotification, onUpdate, navigate]);
+  }, [navigate, onProfile])
+
+  const onSubmit = useCallback(({ name, username, password }: ProfileFormDataProps) => {
+    if (!isDirty) {
+      return setNotification('info');
+    }
+
+    try {
+      onUpdate({ username, data: { name, password } });
+    } finally {
+      setNotification(error ? 'error' : 'success');
+      refreshProfile();
+    }
+  }, [error, isDirty, onUpdate, refreshProfile, setNotification]);
 
   return {
     onSubmit: handleSubmit(onSubmit),
