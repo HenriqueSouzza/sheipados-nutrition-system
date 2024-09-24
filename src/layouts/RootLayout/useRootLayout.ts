@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 export const useRootLayout = () => {
   const theme = useTheme() as Theme;
   const isDesktop = useMediaQuery(theme.breakpoints.up('sm'));
-  const [hiddenSidebar, setHiddenSidebar] = useState<boolean>(!isDesktop ?? false);
+  const [hiddenSidebar, setHiddenSidebar] = useState<boolean>(!isDesktop);
   const { profile: { name } } = useAuth();
 
   useEffect(() => {
