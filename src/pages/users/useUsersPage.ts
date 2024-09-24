@@ -29,7 +29,7 @@ export const useUsersPage = () => {
     console.log('editar', values);
   }
 
-  const onSubmitNewProduct = (values: UserDataProps) => {
+  const onNewUser = (values: UserDataProps) => {
     console.log('criar', values);
   }
 
@@ -49,9 +49,9 @@ export const useUsersPage = () => {
     },
     searchBar: {
       onChangeFilterBy,
-      onSubmitNewProduct,
-      handleModal,
+      onNewUser,
     },
+    handleModal,
     loading,
   }
 }

@@ -4,11 +4,11 @@ import { Table, TableBody, TableHead } from '@/components';
 import { SearchBar } from './components/SearchBar';
 
 export const UsersPage = () => {
-  const { dataTable, searchBar, loading } = useUsersPage();
+  const { dataTable, searchBar, handleModal, loading } = useUsersPage();
 
   return (
     <S.Container>
-      <SearchBar {...searchBar} />
+      <SearchBar {...searchBar} handleModal={handleModal} />
       <S.TableContainer>
         <Table>
           <TableHead columns={dataTable.columns} />

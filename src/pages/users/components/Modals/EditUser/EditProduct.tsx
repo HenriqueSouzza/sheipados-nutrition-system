@@ -1,0 +1,22 @@
+import { useForm } from 'react-hook-form';
+import { FormUser } from '../../Forms';
+import * as S from './EditProduct.styles';
+import { UserDataProps } from '@/interface';
+
+export interface EditUserProps {
+  initialDataUser: UserDataProps
+  onSubmit: (data: UserDataProps) => void
+}
+
+export const EditProduct = ({ onSubmit, initialDataUser }: EditUserProps) => {
+  const { handleSubmit, control } = useForm<typeof initialDataUser>({
+    defaultValues: initialDataUser
+  });
+
+  return (
+    <S.Container>
+      <S.Title>Editar Usuário</S.Title>
+      <FormUser control={control} onSubmit={handleSubmit(onSubmit)} />
+    </S.Container>
+  )
+}

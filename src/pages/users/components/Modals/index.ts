@@ -1,3 +1,3 @@
-export * from './NewProduct';
-export * from './EditProduct';
-export * from './DeleteProduct';
+export * from './NewUser';
+export * from './EditUser';
+export * from './DeleteUser';

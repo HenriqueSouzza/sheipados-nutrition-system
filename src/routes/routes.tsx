@@ -17,7 +17,7 @@ export const Routes = () => {
       <Route path={"*"} element={<NotFoundPage />} />
       <Route path={AUTH} element={<AuthPage />} />
       <Route path={ROOT} element={<MiddlewareRoutes />}>
-        <Route path={ROOT} element={<ProductsPage />} />
+        <Route path={ROOT} element={<UsersPage />} />
         <Route path={PROFILE} element={<ProfilePage />} />
         <Route path={PRODUCTS} element={<ProductsPage />} />
         <Route path={USERS} element={<UsersPage />} />
