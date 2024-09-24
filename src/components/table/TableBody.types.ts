@@ -1,12 +1,20 @@
 import { RowProps } from "./TableCell.types"
 
+export interface LoadingRowProps {
+  colSpan: number
+}
+
 export interface ColumnsProps {
   [key: string]: string
 }
 
-export interface TableBodyProps {
-  columns: ColumnsProps
+export interface TableRowProps {
   rows: Array<RowProps>
+  columns: ColumnsProps
   onEdit: (item: RowProps) => void
   onDelete: (item: RowProps) => void
+}
+
+export interface TableBodyProps extends TableRowProps {
+  loading?: boolean
 }

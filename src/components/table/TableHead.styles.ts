@@ -1,1 +1,1 @@
-export { TableHead } from "@mui/material";
+export { TableHead, TableCell } from "@mui/material";

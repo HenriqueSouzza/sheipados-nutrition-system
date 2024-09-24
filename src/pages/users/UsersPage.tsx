@@ -1,7 +1,6 @@
 import { useUsersPage } from './useUsersPage';
 import * as S from './UsersPage.styles';
 import { Table, TableBody, TableHead } from '@/components';
-import { CircularProgress } from '@mui/material';
 
 export const UsersPage = () => {
   const { dataTable, loading } = useUsersPage();
@@ -11,7 +10,7 @@ export const UsersPage = () => {
       <S.TableContainer>
         <Table>
           <TableHead columns={dataTable.columns} />
-          {loading ? (<CircularProgress size={20} />) : (<TableBody {...dataTable} />)}
+          <TableBody {...dataTable} loading={loading} />
         </Table>
       </S.TableContainer>
     </S.Container>
