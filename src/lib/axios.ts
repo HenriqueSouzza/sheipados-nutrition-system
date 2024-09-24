@@ -8,7 +8,7 @@ const InstanceAxios = axios.create({
   baseURL: import.meta.env.VITE_API,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: !isAuthenticated ?? `Bearer ${accessToken}`
+    Authorization: isAuthenticated ? `Bearer ${accessToken}` : null
   },
 });
 
