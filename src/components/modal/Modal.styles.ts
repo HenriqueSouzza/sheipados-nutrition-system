@@ -23,6 +23,7 @@ export const Content = styled(Box)(({ theme }) => ({
     width: '100%',
     height: '100vh',
     borderRadius: 0,
+    padding: '50px 10px',
   },
 }));
 

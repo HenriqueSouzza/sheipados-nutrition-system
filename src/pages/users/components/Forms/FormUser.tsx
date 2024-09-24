@@ -23,6 +23,7 @@ const Fields = ({ control, name, label }: FieldsProps) => (
     render={({ field, fieldState: { error } }) => (
       <TextField
         {...field}
+        fullWidth
         error={!!error}
         helperText={error?.message}
         label={label}

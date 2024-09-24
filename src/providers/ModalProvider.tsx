@@ -22,6 +22,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   const ModalContextValue: ModalContextProps = useMemo(() => ({
     isOpen,
     handleModal,
+    handleClose
   }), [isOpen]);
 
   return (

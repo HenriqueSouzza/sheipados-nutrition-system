@@ -1,7 +1,6 @@
 import { ReactNode, useCallback, useMemo, useReducer } from "react";
-import { GetUserProps, UpdateUserProps, UserContext, UserContextProps } from "@/contexts";
+import { CreateUserProps, UpdateUserProps, UserContext, UserContextProps } from "@/contexts";
 import { UserActions, InitialStateUser, UserReducer } from "@/reducer";
-import { useAuth } from "@/hooks";
 
 interface UserProviderProps {
   children: ReactNode
@@ -9,21 +8,25 @@ interface UserProviderProps {
 
 export const UserProvider = ({ ...props }: UserProviderProps) => {
   const [state, dispatch] = useReducer(UserReducer, InitialStateUser);
-  const { profile: { accessToken } } = useAuth();
 
   const onUpdate = useCallback(({ username = '', data }: UpdateUserProps) => {
-    UserActions.update(dispatch, username, data, accessToken ?? '');
-  }, [accessToken]);
+    UserActions.update(dispatch, username, data);
+  }, []);
 
-  const onGet = useCallback(({ username = '' }: GetUserProps) => {
-    UserActions.get(dispatch, username, accessToken ?? '');
-  }, [accessToken]);
+  const onGet = useCallback((username?: string) => {
+    UserActions.get(dispatch, username);
+  }, []);
+
+  const onCreate = useCallback(({ email = '', name = '' }: CreateUserProps) => {
+    UserActions.create(dispatch, { email, name });
+  }, []);
 
   const UserContextValue: UserContextProps = useMemo(() => ({
     ...state,
+    onCreate,
     onUpdate,
     onGet,
-  }), [state, onUpdate, onGet]);
+  }), [state, onUpdate, onGet, onCreate]);
 
   return <UserContext.Provider value={UserContextValue} {...props} />
 }

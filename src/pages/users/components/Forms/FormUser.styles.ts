@@ -2,9 +2,10 @@ import { styled } from "@mui/material";
 import { Form as FormComponent } from "@/components";
 
 export const Form = styled(FormComponent)({
-  display: "flex",
+  width: 350,
+  display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  margin: '0 auto',
   gap: 30,
 });
 

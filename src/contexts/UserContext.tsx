@@ -9,8 +9,9 @@ export interface UpdateUserProps {
   }
 }
 
-export interface GetUserProps {
-  username?: UserDataProps['username']
+export interface CreateUserProps {
+  email: UserDataProps['email']
+  name: UserDataProps['name']
 }
 
 export interface UserContextProps {
@@ -18,8 +19,9 @@ export interface UserContextProps {
   userList: Array<UserDataProps>
   loading: boolean
   error: string | boolean
+  onCreate: (props: CreateUserProps) => void
   onUpdate: (props: UpdateUserProps) => void
-  onGet: (props: GetUserProps) => void
+  onGet: (username?: string) => void
 }
 
 const UserContextValues: UserContextProps = {
@@ -27,6 +29,7 @@ const UserContextValues: UserContextProps = {
   userList: [],
   loading: true,
   error: false,
+  onCreate: () => '',
   onUpdate: () => '',
   onGet: () => '',
 }
