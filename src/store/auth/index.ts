@@ -1,3 +1,3 @@
-export { AuthActions } from './AuthActions'
+export { useAuthActions } from './useAuthActions'
 export { AuthReducer, InitialStateAuth } from './AuthReducer'
 export * from './AuthTypes'

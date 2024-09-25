@@ -1,7 +1,6 @@
-import { ReactNode, useCallback, useEffect, useMemo, useReducer } from "react";
+import { ReactNode, useEffect, useMemo, useReducer } from "react";
 import { AuthContext, AuthContextProps } from "@/contexts";
-import { AuthActions, AuthReducer, InitialStateAuth } from "@/reducer";
-import Cookies from "js-cookie";
+import { AuthReducer, InitialStateAuth, useAuthActions } from "@/store";
 
 interface AuthProviderProps {
   children: ReactNode
@@ -9,26 +8,12 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ ...props }: AuthProviderProps) => {
   const [state, dispatch] = useReducer(AuthReducer, InitialStateAuth);
-
-  const onLogin = async (username: string, password: string) => {
-    AuthActions.login(dispatch, { username, password })
-  }
-
-  const onLogout = () => {
-    Cookies.remove('accessToken')
-    Cookies.remove('authenticated')
-    AuthActions.logout(dispatch)
-  }
-
-  const onProfile = useCallback(() => {
-    const accessToken = Cookies.get('accessToken')
-    if (accessToken) {
-      AuthActions.profile(dispatch, accessToken)
-    }
-  }, [dispatch]);
+  const { onLogin, onLogout, onProfile } = useAuthActions(dispatch);
 
   useEffect(() => {
-    onProfile()
+    if (state.profile.accessToken) {
+      onProfile()
+    }
   }, [onProfile, state.profile.accessToken]);
 
   const AuthContextValue: AuthContextProps = useMemo(() => ({
@@ -36,7 +21,7 @@ export const AuthProvider = ({ ...props }: AuthProviderProps) => {
     onLogin,
     onLogout,
     onProfile,
-  }), [state, onProfile]);
+  }), [state, onProfile, onLogin, onLogout]);
 
   return <AuthContext.Provider value={AuthContextValue} {...props} />
 }

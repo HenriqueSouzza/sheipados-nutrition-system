@@ -42,25 +42,15 @@ const notificationsListUsers = {
 
 export const useProfilePage = () => {
   const navigate = useNavigate();
-  const { profile: { name, email, username, firstLogin }, onProfile, loading: loadingAuth } = useAuth();
+  const { profile, onProfile, loading: loadingAuth } = useAuth();
   const { handleNotification } = useNotification();
   const { onUpdate, loading: loadingUser, error } = useUser();
   const loading = loadingUser || loadingAuth;
-  const { handleSubmit, control, reset, formState: { isDirty } } = useForm<ProfileFormDataProps>({
-    defaultValues: {
-      name,
-      username,
-      email,
-    }
-  });
+  const { handleSubmit, control, reset, formState: { isDirty } } = useForm<ProfileFormDataProps>();
 
   useEffect(() => {
-    reset({
-      name,
-      email,
-      username
-    });
-  }, [reset, name, email, username]);
+    reset(profile);
+  }, [reset, profile]);
 
   const fieldsForm: ListFieldFormProps = [
     {
@@ -69,7 +59,7 @@ export const useProfilePage = () => {
       type: 'text',
       readOnly: true,
       placeholder: "username",
-      value: username,
+      value: profile.username,
       control,
     },
     {
@@ -77,7 +67,7 @@ export const useProfilePage = () => {
       name: 'email',
       type: 'text',
       readOnly: true,
-      value: email,
+      value: profile.email,
       placeholder: "email",
       control,
     },
@@ -93,7 +83,7 @@ export const useProfilePage = () => {
       label: 'Senha',
       name: 'password',
       type: 'password',
-      readOnly: !firstLogin,
+      readOnly: !profile.firstLogin,
       value: '*******',
       rules: { required: true },
       placeholder: "digite sua senha",

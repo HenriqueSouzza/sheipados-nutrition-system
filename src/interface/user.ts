@@ -4,4 +4,5 @@ export interface UserDataProps {
   name?: string
   firstLogin?: boolean
   isActive?: boolean
+  password?: string
 }

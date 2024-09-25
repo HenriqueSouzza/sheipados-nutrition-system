@@ -3,10 +3,7 @@ import { createContext } from "react";
 
 export interface UpdateUserProps {
   username: UserDataProps['username'],
-  data: {
-    name?: string
-    password?: string
-  }
+  data: UserDataProps
 }
 
 export interface CreateUserProps {

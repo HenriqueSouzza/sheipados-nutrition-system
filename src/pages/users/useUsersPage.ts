@@ -21,7 +21,7 @@ export const useUsersPage = () => {
   const [userListFilter, setUserListFilter] = useState<typeof userList>(userList);
 
   useEffect(() => {
-    onGet()
+    onGet();
   }, [onGet]);
 
   useEffect(() => {
