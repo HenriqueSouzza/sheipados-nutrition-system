@@ -8,7 +8,3 @@ export const Container = styled('div')({
   flexDirection: 'column',
   gap: '20px',
 });
-
-export const TableContainer = styled('div')({
-  overflow: 'auto',
-})

@@ -10,6 +10,6 @@ export interface DeleteUserProps {
 export const DeleteUser = ({ onSubmit, data }: DeleteUserProps) => (
   <S.Container>
     <S.Title>Deseja remover esse usuário?</S.Title>
-    <Button onClick={() => onSubmit(data)}>Confirmar</Button>
+    <Button variant='contained' onClick={() => onSubmit(data)}>Confirmar</Button>
   </S.Container>
 )

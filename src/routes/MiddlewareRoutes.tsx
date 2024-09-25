@@ -7,17 +7,21 @@ import { useEffect } from "react";
 
 export const MiddlewareRoutes = () => {
   const navigate = useNavigate();
-  const { loading, profile: { authenticated, firstLogin } } = useAuth();
+  const { onLogout, loading, profile: { authenticated, firstLogin, isActive } } = useAuth();
 
   useEffect(() => {
     if (!authenticated) {
       navigate(Paths.AUTH);
     }
 
+    if (isActive === false) {
+      onLogout()
+    }
+
     if (firstLogin) {
       navigate(Paths.PROFILE)
     }
-  }, [authenticated, firstLogin, navigate]);
+  }, [authenticated, firstLogin, isActive, onLogout, navigate]);
 
   return (
     <>

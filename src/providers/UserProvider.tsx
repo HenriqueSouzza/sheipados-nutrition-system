@@ -8,14 +8,15 @@ interface UserProviderProps {
 
 export const UserProvider = ({ ...props }: UserProviderProps) => {
   const [state, dispatch] = useReducer(UserReducer, InitialStateUser);
-  const { onUpdate, onCreate, onGet } = useUserActions(dispatch);
+  const { onUpdate, onCreate, onDelete, onGet } = useUserActions(dispatch);
 
   const UserContextValue: UserContextProps = useMemo(() => ({
     ...state,
     onCreate,
     onUpdate,
+    onDelete,
     onGet,
-  }), [state, onUpdate, onGet, onCreate]);
+  }), [state, onUpdate, onGet, onDelete, onCreate]);
 
   return <UserContext.Provider value={UserContextValue} {...props} />
 }

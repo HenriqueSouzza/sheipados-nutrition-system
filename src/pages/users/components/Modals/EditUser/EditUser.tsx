@@ -3,7 +3,7 @@ import { FormUser } from '../../Forms';
 import * as S from './EditUser.styles';
 import { UserDataProps } from '@/interface';
 
-export interface EditUserProps {
+interface EditUserProps {
   initialDataUser: UserDataProps
   onSubmit: (data: UserDataProps) => void
 }

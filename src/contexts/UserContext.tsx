@@ -18,6 +18,7 @@ export interface UserContextProps {
   error: string | boolean
   onCreate: (props: CreateUserProps) => void
   onUpdate: (props: UpdateUserProps) => void
+  onDelete: (username: string) => void
   onGet: (username?: string) => void
 }
 
@@ -28,6 +29,7 @@ const UserContextValues: UserContextProps = {
   error: false,
   onCreate: () => '',
   onUpdate: () => '',
+  onDelete: () => '',
   onGet: () => '',
 }
 

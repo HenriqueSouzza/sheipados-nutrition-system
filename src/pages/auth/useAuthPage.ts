@@ -25,8 +25,8 @@ export const useAuthPage = () => {
     }
   }, [profile, navigate]);
 
-  const onSubmit = ({ username, password }: FormDataProps) => {
-    onLogin(username, password);
+  const onSubmit = (data: FormDataProps) => {
+    onLogin(data);
   }
 
   return {

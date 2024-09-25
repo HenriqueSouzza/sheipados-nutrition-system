@@ -37,5 +37,15 @@ export const useUserActions = (dispatch: Dispatch<ActionProps>) => {
     }
   };
 
-  return { onCreate, onGet, onUpdate }
+  const onDelete = async (username: string) => {
+    dispatch({ type: USER_REQUEST });
+    try {
+      await axios.delete(`/users/${username}`);
+      await onGet();
+    } catch {
+      dispatch({ type: USER_FAILURE, payload: { error: true } });
+    }
+  };
+
+  return { onCreate, onGet, onUpdate, onDelete }
 }
