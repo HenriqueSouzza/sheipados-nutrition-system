@@ -54,15 +54,16 @@ export const useUsersPage = () => {
     handleNotification(notificationsListUsers[action][type] as { type: AlertProps['color'], feedbackText: string });
   }, [handleNotification]);
 
-  const afterRequest = useCallback(async (action: 'create' | 'update' | 'delete') => {
+  const handleAfterRequest = useCallback(async (action: 'create' | 'update' | 'delete') => {
     if (error) {
       setNotification(action, 'error');
       return
     }
 
     setNotification(action, 'success');
+    onGet()
     handleClose();
-  }, [error, setNotification, handleClose]);
+  }, [error, onGet, setNotification, handleClose]);
 
   const onChangeFilterBy = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -70,29 +71,20 @@ export const useUsersPage = () => {
     setUserListFilter(result);
   }
 
-  const onDeleteUser = ({ username = '' }: UserDataProps) => {
-    try {
-      onDelete(username)
-    } finally {
-      afterRequest('delete');
-    }
-  }
+  const onDeleteUser = useCallback(async ({ username = '' }: UserDataProps) => {
+    await onDelete(username);
+    await handleAfterRequest('delete');
+  }, [onDelete, handleAfterRequest]);
 
-  const onEditUser = ({ username, ...values }: UserDataProps) => {
-    try {
-      onUpdate({ username, data: { ...values } });
-    } finally {
-      afterRequest('update');
-    }
-  }
+  const onEditUser = useCallback(async ({ username, ...values }: UserDataProps) => {
+    await onUpdate({ username, data: { ...values } });
+    await handleAfterRequest('update');
+  }, [onUpdate, handleAfterRequest]);
 
-  const onNewUser = ({ name, email }: UserDataProps) => {
-    try {
-      onCreate({ name, email });
-    } finally {
-      afterRequest('create');
-    }
-  }
+  const onNewUser = useCallback(async ({ name, email }: UserDataProps) => {
+    await onCreate({ name, email });
+    await handleAfterRequest('create');
+  }, [onCreate, handleAfterRequest]);
 
   return {
     dataTable: {

@@ -31,7 +31,6 @@ export const useUserActions = (dispatch: Dispatch<ActionProps>) => {
     dispatch({ type: USER_REQUEST });
     try {
       await axios.post('/users', data);
-      await onGet();
     } catch {
       dispatch({ type: USER_FAILURE, payload: { error: true } });
     }
@@ -41,7 +40,6 @@ export const useUserActions = (dispatch: Dispatch<ActionProps>) => {
     dispatch({ type: USER_REQUEST });
     try {
       await axios.delete(`/users/${username}`);
-      await onGet();
     } catch {
       dispatch({ type: USER_FAILURE, payload: { error: true } });
     }
