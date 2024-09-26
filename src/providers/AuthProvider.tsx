@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo, useReducer } from "react";
+import { ReactNode, useMemo, useReducer } from "react";
 import { AuthContext, AuthContextProps } from "@/contexts";
 import { AuthReducer, InitialStateAuth, useAuthActions } from "@/store";
 
@@ -9,12 +9,6 @@ interface AuthProviderProps {
 export const AuthProvider = ({ ...props }: AuthProviderProps) => {
   const [state, dispatch] = useReducer(AuthReducer, InitialStateAuth);
   const { onLogin, onLogout, onProfile } = useAuthActions(dispatch);
-
-  useEffect(() => {
-    if (state.profile.accessToken) {
-      onProfile()
-    }
-  }, [onProfile, state.profile.accessToken]);
 
   const AuthContextValue: AuthContextProps = useMemo(() => ({
     ...state,

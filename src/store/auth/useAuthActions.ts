@@ -1,40 +1,43 @@
 import { Dispatch, useCallback } from "react";
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "./AuthTypes";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from "./AuthTypes";
 import Cookies from "js-cookie";
 import { ActionProps } from "@/interface";
-import { useHttp } from "@/hooks";
 import { LoginProps } from "@/contexts";
+import { InstanceAxios } from "@/lib";
 
 export const useAuthActions = (dispatch: Dispatch<ActionProps>) => {
-  const axios = useHttp();
-
-  const onLogin = async (data: LoginProps) => {
-    dispatch({ type: LOGIN_REQUEST });
-    try {
-      const response = await axios.post('/auth/login', data);
-      Cookies.set('accessToken', response.data.access_token, { expires: 1, path: '' });
-      Cookies.set('authenticated', 'true', { expires: 1, path: '' });
-      dispatch({ type: LOGIN_SUCCESS, payload: { accessToken: response.data.access_token, authenticated: true } });
-    } catch {
-      dispatch({ type: LOGIN_FAILURE, payload: 'error' });
-    }
-  }
-
-  const onProfile = useCallback(async () => {
-    dispatch({ type: LOGIN_REQUEST });
-    try {
-      const response = await axios.get('/auth/profile');
-      dispatch({ type: LOGIN_SUCCESS, payload: response.data });
-    } catch {
-      dispatch({ type: 'LOGOUT' });
-    }
-  }, [dispatch, axios]);
-
   const onLogout = () => {
     Cookies.remove('accessToken')
     Cookies.remove('authenticated')
-    dispatch({ type: 'LOGOUT' });
-  }
+    dispatch({ type: LOGOUT });
+  };
+
+  const onProfile = useCallback(async (accessToken?: string) => {
+    dispatch({ type: LOGIN_REQUEST });
+    if (!accessToken) {
+      accessToken = Cookies.get('accessToken');
+    }
+
+    try {
+      const response = await InstanceAxios.get('/auth/profile', { headers: { Authorization: `Bearer ${accessToken}` } });
+      dispatch({ type: LOGIN_SUCCESS, payload: { ...response.data } });
+    } catch {
+      dispatch({ type: LOGIN_FAILURE, payload: 'error' });
+    }
+  }, [dispatch]);
+
+  const onLogin = async (body: LoginProps) => {
+    dispatch({ type: LOGIN_REQUEST });
+    try {
+      const { data } = await InstanceAxios.post('/auth/login', body);
+      Cookies.set('accessToken', data.access_token, { expires: 1, path: '', secure: true, sameSite: 'Strict' });
+      Cookies.set('authenticated', 'true', { expires: 1, path: '', secure: true, sameSite: 'Strict' });
+      dispatch({ type: LOGIN_SUCCESS, payload: { accessToken: data.access_token, authenticated: true } });
+      onProfile(data.access_token);
+    } catch {
+      dispatch({ type: LOGIN_FAILURE, payload: 'error' });
+    }
+  };
 
   return { onLogin, onProfile, onLogout }
 }

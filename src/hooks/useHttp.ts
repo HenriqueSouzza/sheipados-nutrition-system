@@ -1,18 +1,18 @@
 import { InstanceAxios } from "@/lib";
 import { useAuth } from "./useAuth";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 
 export const useHttp = () => {
-  const { profile: { accessToken, authenticated } } = useAuth();
+  const { profile: { accessToken, authenticated }, loading } = useAuth();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     InstanceAxios.interceptors.request.use(config => {
-      if (authenticated) {
-        config.headers.Authorization = `Bearer ${accessToken}`
-      }
+      // if (authenticated) {
+      //   config.headers.Authorization = `Bearer ${accessToken}`
+      // }
       return config;
     })
   }, [accessToken, authenticated])
 
-  return InstanceAxios
+  return { httpRequest: InstanceAxios, loading }
 }

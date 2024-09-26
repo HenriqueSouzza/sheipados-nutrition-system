@@ -10,7 +10,6 @@ const App = () => (
 		<ThemeProvider theme={theme}>
 			<CssBaseline />
 			<NotificationProvider>
-
 				<AuthProvider>
 					<UserProvider>
 						<ModalProvider>

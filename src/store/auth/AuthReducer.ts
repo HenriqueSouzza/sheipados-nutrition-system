@@ -31,6 +31,10 @@ export const AuthReducer = (state = InitialStateAuth, action: ActionProps) => {
       return {
         ...state,
         loading: false,
+        profile: {
+          accessToken: '',
+          authenticated: false,
+        },
         error: action.payload
       };
     case LOGOUT:

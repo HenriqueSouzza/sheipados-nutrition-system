@@ -17,17 +17,15 @@ export const useAuthPage = () => {
       password: ''
     }
   });
-  const { onLogin, profile, loading } = useAuth();
+  const { onLogin, profile: { isActive }, loading } = useAuth();
 
   useEffect(() => {
-    if (profile.authenticated) {
-      navigate(Paths.ROOT);
+    if (isActive) {
+      navigate(Paths.ROOT)
     }
-  }, [profile, navigate]);
+  }, [isActive, navigate])
 
-  const onSubmit = (data: FormDataProps) => {
-    onLogin(data);
-  }
+  const onSubmit = async (data: FormDataProps) => await onLogin(data)
 
   return {
     onSubmit: handleSubmit(onSubmit),
