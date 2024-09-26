@@ -53,6 +53,8 @@ export const Actions = styled('div')({
   display: 'flex',
   gap: 20,
   alignItems: 'center',
-})
+});
 
-export const Link = styled(LinkComponent)({})
+export const Link = styled(LinkComponent)({
+  cursor: 'pointer'
+});
