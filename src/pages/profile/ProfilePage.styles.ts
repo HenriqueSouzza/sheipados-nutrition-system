@@ -2,7 +2,7 @@ import {
   Form as FormComponent,
   Button as ButtonComponent,
 } from "@/components";
-import { styled } from "@mui/material";
+import { styled, Link as LinkComponent } from "@mui/material";
 
 export const Container = styled('div')({
   width: '100%',
@@ -48,3 +48,11 @@ export const Field = styled(TitlePage)({
 export const Button = styled(ButtonComponent)({
   width: 100,
 });
+
+export const Actions = styled('div')({
+  display: 'flex',
+  gap: 20,
+  alignItems: 'center',
+})
+
+export const Link = styled(LinkComponent)({})

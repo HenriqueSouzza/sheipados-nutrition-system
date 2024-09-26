@@ -52,6 +52,10 @@ export const useProfilePage = () => {
     reset(profile);
   }, [reset, profile]);
 
+  const setNotification = useCallback((type: 'info' | 'success' | 'error') => {
+    handleNotification(notificationsListUsers[type] as { type: AlertProps['color'], feedbackText: string });
+  }, [handleNotification]);
+
   const fieldsForm: ListFieldFormProps = [
     {
       label: 'Username',
@@ -91,34 +95,33 @@ export const useProfilePage = () => {
     },
   ];
 
-  const setNotification = useCallback((type: 'info' | 'success' | 'error') => {
-    handleNotification(notificationsListUsers[type] as { type: AlertProps['color'], feedbackText: string });
-  }, [handleNotification]);
-
-  const refreshProfile = useCallback(() => {
-    try {
-      onProfile()
-    } finally {
-      navigate(Paths.ROOT);
+  const handleAfterRequest = useCallback(() => {
+    if (error) {
+      return setNotification('error');
     }
-  }, [navigate, onProfile])
 
-  const onSubmit = useCallback(({ name, username, password }: ProfileFormDataProps) => {
+    setNotification('success');
+    onProfile();
+  }, [error, setNotification, onProfile])
+
+  const onSubmit = useCallback(async ({ name, username, password }: ProfileFormDataProps) => {
     if (!isDirty) {
       return setNotification('info');
     }
 
-    try {
-      onUpdate({ username, data: { name, password } });
-    } finally {
-      setNotification(error ? 'error' : 'success');
-      refreshProfile();
-    }
-  }, [error, isDirty, onUpdate, refreshProfile, setNotification]);
+    await onUpdate({ username, data: { name, password } });
+    handleAfterRequest();
+  }, [isDirty, onUpdate, handleAfterRequest, setNotification]);
+
+  const handleRedirectPageRoot = () => {
+    navigate(Paths.ROOT);
+  }
 
   return {
     onSubmit: handleSubmit(onSubmit),
+    handleRedirectPageRoot,
     fieldsForm,
     loading,
+    firstLogin: profile.firstLogin
   }
 }

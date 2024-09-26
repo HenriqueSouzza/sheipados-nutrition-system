@@ -47,7 +47,7 @@ const FieldText = ({ value, label }: FieldFormProps) => {
 }
 
 export const ProfilePage = () => {
-  const { onSubmit, fieldsForm, loading } = useProfilePage();
+  const { onSubmit, firstLogin, handleRedirectPageRoot, fieldsForm, loading } = useProfilePage();
 
   return (
     <S.Container>
@@ -62,7 +62,12 @@ export const ProfilePage = () => {
               {...field}
             />
           ))}
-          <S.Button disabled={loading} variant='contained' type='submit' size='small'>Salvar</S.Button>
+          <S.Actions>
+            <S.Button disabled={loading} variant='contained' type='submit' size='small'>Salvar</S.Button>
+            {!firstLogin ? (
+              <S.Link underline='none' onClick={handleRedirectPageRoot}>Ir para página inicial</S.Link>
+            ) : null}
+          </S.Actions>
         </S.Form>
       </S.Section>
     </S.Container>
