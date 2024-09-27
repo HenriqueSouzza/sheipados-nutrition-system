@@ -30,12 +30,13 @@ export const useAuthPage = () => {
     if (error) {
       handleNotification({ type: 'error', feedbackText: String(error) })
     }
-  }, [error, handleNotification])
+  }, [error, handleNotification]);
 
-  const onSubmit = async (data: FormDataProps) => {
-    await onLogin(data)
+  useEffect(() => {
     handleAfterRequest();
-  };
+  }, [handleAfterRequest]);
+
+  const onSubmit = async (data: FormDataProps) => await onLogin(data);
 
   return {
     onSubmit: handleSubmit(onSubmit),
