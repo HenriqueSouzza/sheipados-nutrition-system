@@ -22,7 +22,7 @@ export const useAuthActions = (dispatch: Dispatch<ActionProps>) => {
       const response = await InstanceAxios.get('/auth/profile', { headers: { Authorization: `Bearer ${accessToken}` } });
       dispatch({ type: LOGIN_SUCCESS, payload: { ...response.data } });
     } catch {
-      dispatch({ type: LOGIN_FAILURE, payload: 'error' });
+      dispatch({ type: LOGIN_FAILURE, payload: 'Erro ao buscar os dados do usuário' });
     }
   }, [dispatch]);
 
@@ -34,8 +34,10 @@ export const useAuthActions = (dispatch: Dispatch<ActionProps>) => {
       Cookies.set('authenticated', 'true', { expires: 1, path: '', secure: true, sameSite: 'Strict' });
       dispatch({ type: LOGIN_SUCCESS, payload: { accessToken: data.access_token, authenticated: true } });
       onProfile(data.access_token);
-    } catch {
-      dispatch({ type: LOGIN_FAILURE, payload: 'error' });
+    } catch (e) {
+      dispatch({
+        type: LOGIN_FAILURE, payload: 'Usuário ou senha inválido'
+      });
     }
   };
 
