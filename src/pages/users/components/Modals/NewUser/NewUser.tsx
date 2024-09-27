@@ -21,7 +21,7 @@ export const NewUser = ({ onSubmit }: NewUserProps) => {
   return (
     <S.Container>
       <S.Title>Criar Usuário</S.Title>
-      <FormUser control={control} onSubmit={handleSubmit(onSubmit)} />
+      <FormUser isCreateUser control={control} onSubmit={handleSubmit(onSubmit)} />
     </S.Container>
   )
 }
