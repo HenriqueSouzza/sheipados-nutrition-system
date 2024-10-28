@@ -1,7 +1,9 @@
+import { Paths } from "@/config";
 import { useModal, useNotification, useProducts } from "@/hooks";
 import { ProductsDataProps } from "@/interface";
 import { AlertProps } from "@mui/material";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const notificationsListUsers = {
   create: {
@@ -49,7 +51,8 @@ const notificationsListUsers = {
 export const useProductsPage = () => {
   const { handleModal, handleClose } = useModal();
   const { handleNotification } = useNotification();
-  const { loading, productList, error, onGet, onCreate, onUpdate, onDelete } = useProducts();
+  const navigate = useNavigate();
+  const { loading, productList, error, onGet, onUpdate, onDelete } = useProducts();
   const [productListFilter, setProductListFilter] = useState<typeof productList>(productList);
 
   useEffect(() => {
@@ -91,15 +94,13 @@ export const useProductsPage = () => {
     await handleAfterRequest('disable');
   }, [onUpdate, handleAfterRequest]);
 
-  const onEditProduct = useCallback(async (values: ProductsDataProps) => {
-    await onUpdate({ code: values.code_ean ?? '', body: values });
-    await handleAfterRequest('update');
-  }, [onUpdate, handleAfterRequest]);
+  const onEditProduct = useCallback((values: ProductsDataProps) => {
+    navigate(`${Paths.PRODUCTS}/edit/${values.code_ean}`);
+  }, [navigate]);
 
-  const onNewProduct = useCallback(async (values: ProductsDataProps) => {
-    await onCreate(values);
-    await handleAfterRequest('create');
-  }, [onCreate, handleAfterRequest]);
+  const onNewProduct = useCallback(() => {
+    navigate(Paths.PRODUCTS_NEW);
+  }, [navigate]);
 
   return {
     dataTable: {

@@ -2,7 +2,7 @@ import { Table, TableBody, TableHead } from '@/components';
 import * as S from './ProductList.styles';
 import { ProductsDataProps } from '@/interface';
 import { ReactNode } from 'react';
-import { DeleteProduct, DisableProduct, EditProduct } from '../Modals';
+import { DeleteProduct, DisableProduct } from '../Modals';
 
 interface ProductListProps {
   columns: Record<string, string>
@@ -20,7 +20,7 @@ export const ProductList = ({ columns, onModal, onEdit, onDisable, onDelete, ...
       <TableHead columns={columns} />
       <TableBody
         columns={columns}
-        onEdit={(item) => onModal(<EditProduct onSubmitEditProduct={onEdit} initialProductData={item} />)}
+        onEdit={(item) => onEdit(item)}
         onDisable={(item) => onModal(<DisableProduct onSubmitDisableProduct={onDisable} dataProduct={item} />)}
         onDelete={(item) => onModal(<DeleteProduct onSubmitDeleteProduct={onDelete} dataProduct={item} />)}
         {...props}

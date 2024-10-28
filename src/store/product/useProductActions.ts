@@ -1,5 +1,5 @@
 import { Dispatch, useCallback } from "react";
-import { PRODUCT_FAILURE, PRODUCT_GET_SUCCESS, PRODUCT_REQUEST, PRODUCT_UPDATE_SUCCESS } from "./ProductTypes";
+import { PRODUCT_FAILURE, PRODUCT_GET_DETAIL_SUCCESS, PRODUCT_GET_SUCCESS, PRODUCT_REQUEST } from "./ProductTypes";
 import { ActionProps, ProductsDataProps } from "@/interface";
 import { InstanceAxios } from "@/lib";
 
@@ -13,7 +13,7 @@ export const useProductActions = (dispatch: Dispatch<ActionProps>, accessToken?:
     dispatch({ type: PRODUCT_REQUEST });
     try {
       const response = await InstanceAxios.put(`/products/${code}`, body, { headers: { Authorization: `Bearer ${accessToken}` } })
-      dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: response.data });
+      dispatch({ type: PRODUCT_GET_DETAIL_SUCCESS, payload: response.data });
     } catch {
       dispatch({ type: PRODUCT_FAILURE, payload: { error: true } });
     }
@@ -22,7 +22,7 @@ export const useProductActions = (dispatch: Dispatch<ActionProps>, accessToken?:
     dispatch({ type: PRODUCT_REQUEST });
     try {
       const response = await InstanceAxios.get(`/products/${code ?? ''}`, { headers: { Authorization: `Bearer ${accessToken}` } })
-      dispatch({ type: PRODUCT_GET_SUCCESS, payload: response.data });
+      dispatch({ type: code ? PRODUCT_GET_DETAIL_SUCCESS : PRODUCT_GET_SUCCESS, payload: response.data });
     } catch {
       dispatch({ type: PRODUCT_FAILURE, payload: { error: true } });
     }

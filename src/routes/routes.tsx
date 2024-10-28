@@ -1,5 +1,5 @@
 import { Routes as Router, Route } from "react-router-dom"
-import { AuthPage, NotFoundPage, ProductsPage, ProfilePage, UsersPage } from "@/pages"
+import { AuthPage, NotFoundPage, ProductsCreatePage, ProductsEditPage, ProductsPage, ProfilePage, UsersPage } from "@/pages"
 import { MiddlewareRoutes } from "./MiddlewareRoutes"
 import { Paths } from "@/config"
 
@@ -8,6 +8,8 @@ export const Routes = () => {
     AUTH,
     ROOT,
     PRODUCTS,
+    PRODUCTS_EDIT,
+    PRODUCTS_NEW,
     USERS,
     PROFILE
   } = Paths;
@@ -20,6 +22,8 @@ export const Routes = () => {
         <Route path={ROOT} element={<UsersPage />} />
         <Route path={PROFILE} element={<ProfilePage />} />
         <Route path={PRODUCTS} element={<ProductsPage />} />
+        <Route path={PRODUCTS_EDIT} element={<ProductsEditPage />} />
+        <Route path={PRODUCTS_NEW} element={<ProductsCreatePage />} />
         <Route path={USERS} element={<UsersPage />} />
       </Route>
     </Router>

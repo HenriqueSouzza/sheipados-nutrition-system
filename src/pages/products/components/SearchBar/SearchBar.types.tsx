@@ -1,8 +1,6 @@
-import { ChangeEvent, ReactNode } from "react"
-import { ProductFormDataProps } from "../Forms"
+import { ChangeEvent } from "react"
 
 export interface SearchBarProps {
   onChangeFilterBy: (e: ChangeEvent<HTMLInputElement>) => void
-  handleModal: (value: ReactNode) => void
-  onNewProduct: (value: ProductFormDataProps) => void
+  onNewProduct: () => void
 }

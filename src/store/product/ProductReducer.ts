@@ -1,5 +1,5 @@
 import { ActionProps } from "@/interface";
-import { PRODUCT_FAILURE, PRODUCT_GET_SUCCESS, PRODUCT_REQUEST, PRODUCT_UPDATE_SUCCESS } from "./ProductTypes";
+import { PRODUCT_FAILURE, PRODUCT_GET_SUCCESS, PRODUCT_REQUEST, PRODUCT_GET_DETAIL_SUCCESS } from "./ProductTypes";
 
 export const InitialStateProduct = {
   product: {},
@@ -15,7 +15,7 @@ export const ProductReducer = (state = InitialStateProduct, action: ActionProps)
         ...state,
         loading: true
       };
-    case PRODUCT_UPDATE_SUCCESS:
+    case PRODUCT_GET_DETAIL_SUCCESS:
       return {
         ...state,
         loading: false,

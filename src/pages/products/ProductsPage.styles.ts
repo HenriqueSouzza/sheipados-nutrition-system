@@ -8,3 +8,9 @@ export const Container = styled('div')({
   flexDirection: 'column',
   gap: '20px',
 });
+
+export const Title = styled('p')({
+  margin: 0,
+  fontSize: '24px',
+  fontWeight: 500,
+});
