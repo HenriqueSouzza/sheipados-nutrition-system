@@ -21,7 +21,7 @@ const EmptyRow = ({ colSpan }: LoadingRowProps) => (
   </S.TableRow>
 );
 
-const TableRow = ({ rows, columns, onEdit, onDelete }: TableRowProps) => (
+const TableRow = ({ rows, columns, onEdit, onDelete, onDisable }: TableRowProps) => (
   !rows.length ? (
     <EmptyRow colSpan={Object.keys(columns).length} />
   ) : (
@@ -34,6 +34,7 @@ const TableRow = ({ rows, columns, onEdit, onDelete }: TableRowProps) => (
             column={column}
             onEdit={onEdit}
             onDelete={onDelete}
+            onDisable={onDisable}
           />
         ))}
       </S.TableRow>
@@ -41,7 +42,7 @@ const TableRow = ({ rows, columns, onEdit, onDelete }: TableRowProps) => (
   )
 )
 
-export const TableBody = ({ rows, columns, onEdit, onDelete, loading }: TableBodyProps) => (
+export const TableBody = ({ rows, columns, onEdit, onDelete, onDisable, loading }: TableBodyProps) => (
   <S.TableBody>
     {loading ? (
       <LoadingRow colSpan={Object.keys(columns).length} />
@@ -51,6 +52,7 @@ export const TableBody = ({ rows, columns, onEdit, onDelete, loading }: TableBod
         columns={columns}
         onEdit={onEdit}
         onDelete={onDelete}
+        onDisable={onDisable}
       />
     )}
   </S.TableBody>

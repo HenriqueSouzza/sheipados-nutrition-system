@@ -12,7 +12,8 @@ export interface TableRowProps {
   rows: Array<RowProps>
   columns: ColumnsProps
   onEdit: (item: RowProps) => void
-  onDelete: (item: RowProps) => void
+  onDelete?: (item: RowProps) => void
+  onDisable?: (item: RowProps) => void
 }
 
 export interface TableBodyProps extends TableRowProps {

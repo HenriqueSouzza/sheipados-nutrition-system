@@ -17,7 +17,7 @@ export const useProductsPage = () => {
     console.log('filter by', value)
   }
 
-  const onDeleteProduct = (value: ProductsDataProps) => {
+  const onDisableProduct = (value: ProductsDataProps) => {
     console.log('delete', value)
   }
 
@@ -38,7 +38,7 @@ export const useProductsPage = () => {
       },
       rows: productList as Array<{ [key: string]: string }>,
       onEdit: onEditProduct,
-      onDelete: onDeleteProduct,
+      onDisable: onDisableProduct,
       handleModal,
     },
     searchBar: {

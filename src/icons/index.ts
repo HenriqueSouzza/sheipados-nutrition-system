@@ -10,4 +10,5 @@ export {
   Login,
   Menu,
   Delete,
+  VisibilityOff
 } from "@mui/icons-material";
