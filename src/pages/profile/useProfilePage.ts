@@ -104,12 +104,12 @@ export const useProfilePage = () => {
     onProfile();
   }, [error, setNotification, onProfile])
 
-  const onSubmit = useCallback(async ({ name, username, password }: ProfileFormDataProps) => {
+  const onSubmit = useCallback(async ({ name, username, password, email }: ProfileFormDataProps) => {
     if (!isDirty) {
       return setNotification('info');
     }
 
-    await onUpdate({ username, data: { name, password } });
+    await onUpdate({ username, data: { name, password, email } });
     handleAfterRequest();
   }, [isDirty, onUpdate, handleAfterRequest, setNotification]);
 
