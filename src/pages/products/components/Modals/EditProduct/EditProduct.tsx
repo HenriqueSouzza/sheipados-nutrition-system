@@ -1,15 +1,16 @@
 import { useForm } from 'react-hook-form';
-import { FormProduct, ProductFormDataProps } from '../../Forms';
+import { FormProduct } from '../../Forms';
 import * as S from './EditProduct.styles';
+import { ProductsDataProps } from '@/interface';
 
 export interface EditProductProps {
-  data: ProductFormDataProps
-  onSubmitEditProduct: (data: ProductFormDataProps) => void
+  initialProductData: ProductsDataProps
+  onSubmitEditProduct: (data: ProductsDataProps) => void
 }
 
-export const EditProduct = ({ onSubmitEditProduct, data }: EditProductProps) => {
-  const { handleSubmit, control } = useForm<ProductFormDataProps>({
-    defaultValues: data
+export const EditProduct = ({ onSubmitEditProduct, initialProductData }: EditProductProps) => {
+  const { handleSubmit, control } = useForm<ProductsDataProps>({
+    defaultValues: initialProductData
   });
 
   return (

@@ -2,20 +2,16 @@ import { Control, Controller } from 'react-hook-form'
 import * as S from './FormProduct.styles'
 import { Button, TextField } from '@/components'
 import { BaseSyntheticEvent } from 'react'
-
-export interface ProductFormDataProps {
-  productCode: string
-  productName: string
-}
+import { ProductsDataProps } from '@/interface'
 
 interface FormProductProps {
-  control: Control<ProductFormDataProps>
+  control: Control<ProductsDataProps>
   onSubmit: (data: BaseSyntheticEvent, e?: Event) => void
 }
 
 interface FieldsProps {
-  control: Control<ProductFormDataProps>
-  name: keyof ProductFormDataProps
+  control: Control<ProductsDataProps>
+  name: keyof ProductsDataProps
   label: string
 }
 

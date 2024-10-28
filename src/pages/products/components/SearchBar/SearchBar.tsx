@@ -4,9 +4,9 @@ import { SearchBarProps } from './SearchBar.types';
 import { NewProduct } from '../Modals';
 import { memo } from 'react';
 
-export const SearchBar = memo(({ onChangeFilterBy, handleModal, onSubmitNewProduct }: SearchBarProps) => {
+export const SearchBar = memo(({ onChangeFilterBy, handleModal, onNewProduct }: SearchBarProps) => {
   const handleClickNewProduct = () => {
-    handleModal(<NewProduct onSubmitNewProduct={onSubmitNewProduct} />)
+    handleModal(<NewProduct onSubmitNewProduct={onNewProduct} />)
   }
 
   return (

@@ -1,15 +1,15 @@
-import { ProductFormDataProps } from '../../Forms';
 import { Button } from '@/components';
 import * as S from './DeleteProduct.styles';
+import { ProductsDataProps } from '@/interface';
 
 export interface DeleteProductProps {
-  data: ProductFormDataProps
-  onSubmitDeleteProduct: (data: ProductFormDataProps) => void
+  dataProduct: ProductsDataProps
+  onSubmitDeleteProduct: (data: ProductsDataProps) => void
 }
 
-export const DeleteProduct = ({ onSubmitDeleteProduct, data }: DeleteProductProps) => (
+export const DeleteProduct = ({ onSubmitDeleteProduct, dataProduct }: DeleteProductProps) => (
   <S.Container>
-    <S.Title>Deseja delete esse produto?</S.Title>
-    <Button onClick={() => onSubmitDeleteProduct(data)}>Confirmar</Button>
+    <S.Title>Deseja desativar esse produto?</S.Title>
+    <Button onClick={() => onSubmitDeleteProduct(dataProduct)}>Confirmar</Button>
   </S.Container>
 )

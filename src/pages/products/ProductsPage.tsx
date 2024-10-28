@@ -1,14 +1,14 @@
 import * as S from './ProductsPage.styles';
 import { useProductsPage } from './useProductsPage';
-import { SearchBar } from './components';
+import { ProductList, SearchBar } from './components';
 
 export const ProductsPage = () => {
-  const { searchBar } = useProductsPage();
+  const { searchBar, dataTable, handleModal, loading } = useProductsPage();
 
   return (
     <S.Container>
       <SearchBar {...searchBar} />
-      {/* <ProductList {...dataTable} /> */}
+      <ProductList onModal={handleModal} {...dataTable} loading={loading} />
     </S.Container>
   );
 };

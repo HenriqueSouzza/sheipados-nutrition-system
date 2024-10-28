@@ -1,14 +1,10 @@
 import { useModal } from "@/hooks";
-import { ProductsProps } from "@/interface";
+import { ProductsDataProps } from "@/interface";
 import { ChangeEvent } from "react";
-
-interface DataProductProps {
-  productCode: string
-  productName: string
-}
 
 export const useProductsPage = () => {
   const { handleModal } = useModal();
+  const loading = false;
   const productList = [
     {
       productCode: '123456789',
@@ -21,15 +17,15 @@ export const useProductsPage = () => {
     console.log('filter by', value)
   }
 
-  const onSubmitDeleteProduct = (value: DataProductProps) => {
+  const onDeleteProduct = (value: ProductsDataProps) => {
     console.log('delete', value)
   }
 
-  const onSubmitEditProduct = (values: DataProductProps) => {
+  const onEditProduct = (values: ProductsDataProps) => {
     console.log('editar', values);
   }
 
-  const onSubmitNewProduct = (values: DataProductProps) => {
+  const onNewProduct = (values: ProductsDataProps) => {
     console.log('criar', values);
   }
 
@@ -40,15 +36,17 @@ export const useProductsPage = () => {
         productName: 'Nome do produto',
         actions: 'Actions',
       },
-      rows: productList as Array<ProductsProps>,
-      onSubmitEditProduct,
-      onSubmitDeleteProduct,
+      rows: productList as Array<{ [key: string]: string }>,
+      onEdit: onEditProduct,
+      onDelete: onDeleteProduct,
       handleModal,
     },
     searchBar: {
       onChangeFilterBy,
-      onSubmitNewProduct,
+      onNewProduct,
       handleModal,
     },
+    handleModal,
+    loading,
   }
 }
