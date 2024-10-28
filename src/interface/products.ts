@@ -7,7 +7,7 @@ export interface ProductsDataProps {
   code_ncm?: string
   code_cest?: string
   code_cfop?: string
-  isActive?: boolean
+  is_active?: boolean
   value_last_pushase?: string;
   cost_price?: string;
   profit_margin?: string;
