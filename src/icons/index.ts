@@ -11,5 +11,7 @@ export {
   Menu,
   Delete,
   VisibilityOff,
-  Storefront
+  Storefront,
+  Add,
+  ShoppingBasket
 } from "@mui/icons-material";

@@ -21,12 +21,12 @@ const EmptyRow = ({ colSpan }: LoadingRowProps) => (
   </S.TableRow>
 );
 
-const TableRow = ({ rows, columns, onEdit, onDelete, onDisable }: TableRowProps) => (
+const TableRow = ({ rows, columns, onEdit, onDelete, onDisable, onRow }: TableRowProps) => (
   !rows.length ? (
     <EmptyRow colSpan={Object.keys(columns).length} />
   ) : (
     rows.map((row: RowProps) => (
-      <S.TableRow key={Number(Math.random())}>
+      <S.TableRow onClick={() => onRow && onRow(row)} key={Number(Math.random())}>
         {Object.keys(columns).map((column: string) => (
           <TableCell
             key={Number(Math.random())}
@@ -42,7 +42,7 @@ const TableRow = ({ rows, columns, onEdit, onDelete, onDisable }: TableRowProps)
   )
 )
 
-export const TableBody = ({ rows, columns, onEdit, onDelete, onDisable, loading }: TableBodyProps) => (
+export const TableBody = ({ rows, columns, onEdit, onDelete, onDisable, onRow, loading }: TableBodyProps) => (
   <S.TableBody>
     {loading ? (
       <LoadingRow colSpan={Object.keys(columns).length} />
@@ -50,6 +50,7 @@ export const TableBody = ({ rows, columns, onEdit, onDelete, onDisable, loading 
       <TableRow
         rows={rows}
         columns={columns}
+        onRow={onRow}
         onEdit={onEdit}
         onDelete={onDelete}
         onDisable={onDisable}
