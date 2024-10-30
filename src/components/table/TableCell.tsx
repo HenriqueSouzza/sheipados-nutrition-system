@@ -4,9 +4,11 @@ import { Delete, EditNote, VisibilityOff } from "@/icons";
 
 const TableCellActions = ({ row, onEdit, onDelete, onDisable }: TableCellActionsProps) => (
   <S.TableCellActions>
-    <S.IconActions onClick={() => onEdit(row)}>
-      <EditNote />
-    </S.IconActions>
+    {onEdit && (
+      <S.IconActions onClick={() => onEdit(row)}>
+        <EditNote />
+      </S.IconActions>
+    )}
     {onDelete && (
       <S.IconActions onClick={() => onDelete(row)!}>
         <Delete />

@@ -6,4 +6,5 @@ export const Paths = {
   PRODUCTS_NEW: '/products/new',
   USERS: '/users',
   PROFILE: '/profile',
+  CASH: '/cash'
 }

@@ -4,7 +4,7 @@ export interface RowProps {
 
 export interface TableCellActionsProps {
   row: RowProps
-  onEdit: (item: RowProps) => void
+  onEdit?: (item: RowProps) => void
   onDelete?: (item: RowProps) => void
   onDisable?: (item: RowProps) => void
 }

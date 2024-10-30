@@ -10,5 +10,6 @@ export {
   Login,
   Menu,
   Delete,
-  VisibilityOff
+  VisibilityOff,
+  Storefront
 } from "@mui/icons-material";
