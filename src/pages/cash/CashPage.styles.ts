@@ -9,12 +9,6 @@ export const Container = styled('div')({
   gap: 20,
 });
 
-export const Title = styled('p')({
-  margin: 0,
-  fontSize: '24px',
-  fontWeight: 500,
-});
-
 export const Amount = styled('p')({
   margin: 0,
   fontWeight: 700,
@@ -26,7 +20,7 @@ export const FlowFreeCash = styled('div')(({ theme }) => ({
   display: 'flex',
   gap: 50,
   [theme.breakpoints.down('md')]: {
-    flexDirection: 'column',
+    flexDirection: 'column-reverse',
     gap: 20,
   },
 }));

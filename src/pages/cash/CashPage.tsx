@@ -7,7 +7,6 @@ export const CashPage = () => {
 
   return (
     <S.Container>
-      <S.Title>Caixa Livre</S.Title>
       <S.FlowFreeCash>
         <ProductIdentifier {...productIdentifier} />
         <ProductList {...productList} />

@@ -13,7 +13,7 @@ export const ProductIdentifier = styled('section')(({ theme }) => ({
 
 export const Form = styled(FormComponent)({
   display: 'flex',
-  gap: 25,
+  gap: 20,
   flexDirection: 'column',
 })
 
