@@ -170,7 +170,8 @@ export const ProductIdentifier = () => {
           {body}
         </Card>
       ))}
-      <Button variant='contained'>Fechar compra</Button>
+      <Button variant='contained' color='secondary'>Adicionar Item</Button>
+      <Button variant='contained' color='success'>Fechar compra</Button>
     </S.ProductIdentifier>
   )
 }
