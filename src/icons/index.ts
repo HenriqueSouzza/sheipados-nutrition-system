@@ -13,5 +13,7 @@ export {
   VisibilityOff,
   Storefront,
   Add,
-  ShoppingBasket
+  ShoppingBasket,
+  ChangeCircle,
+  ArrowBack
 } from "@mui/icons-material";
