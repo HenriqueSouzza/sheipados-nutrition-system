@@ -98,21 +98,39 @@ const ActionsProductList = ({ itemSelected, onAddItem, onUpdateItem, onRemoveIte
 }
 
 interface MakePurchaseProps {
-  onClick: () => void
+  onMakePurchase: () => void
   totalAmount: string
 }
 
-const MakePurchase = ({ onClick, totalAmount }: MakePurchaseProps) => (
-  <>
-    <Card title='Total'>
-      <S.Amount>R$ {totalAmount}</S.Amount>
-    </Card>
-    <Button type='button' onClick={onClick} variant='contained' color='success' startIcon={<ShoppingBasket />}>Fechar compra</Button>
-  </>
+interface FieldMakePurchaseFormProps {
+  title: string,
+  input: (value: string) => ReactNode
+}
+
+const FieldMakePurchaseForm: Array<FieldMakePurchaseFormProps> = [
+  {
+    title: 'Total a Pagar',
+    input: (value?: string) => (<S.Amount>R$ {value}</S.Amount>),
+  },
+  // {
+  //   title: 'Forma de pagamento',
+  //   input: () => <></>,
+  // },
+]
+
+const MakePurchase = ({ onMakePurchase, totalAmount }: MakePurchaseProps) => (
+  <S.Form onSubmit={onMakePurchase}>
+    {FieldMakePurchaseForm.map(({ title, input }: FieldMakePurchaseFormProps) => (
+      <Card key={Math.random()} title={title}>
+        {input(totalAmount)}
+      </Card>
+    ))}
+    <Button type='submit' variant='contained' color='success' startIcon={<ShoppingBasket />}>Fechar compra</Button>
+  </S.Form>
 )
 
 interface ProductIdentifierProps extends ActionsProductListProps {
-  onMakePurchase: MakePurchaseProps['onClick']
+  onMakePurchase: MakePurchaseProps['onMakePurchase']
   onRemoveItem: ChangeProductListProps['onRemoveItem']
   onDisableModeEdition: ChangeProductListProps['onDisableModeEdition']
   itemSelected: ActionsProductListProps['itemSelected']
@@ -128,6 +146,6 @@ export const ProductIdentifier = ({ itemSelected, totalAmount, onAddItem, onUpda
       onRemoveItem={onRemoveItem}
       itemSelected={itemSelected}
     />
-    <MakePurchase onClick={onMakePurchase} totalAmount={totalAmount} />
+    <MakePurchase onMakePurchase={onMakePurchase} totalAmount={totalAmount} />
   </S.ProductIdentifier>
 )
